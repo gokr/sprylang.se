@@ -1,0 +1,19 @@
+site_name: Spry Language
+site_url: http://sprylang.org
+site_dir: www
+copyright: "Spry is licensed under the <a href='https://github.com/gokr/spry/blob/master/LICENSE'>MIT license"
+repo_name: GitHub
+repo_url: http://github.com/gokr/spry
+site_description: The Spry Programming language homepage
+site_author: Göran Krampe
+site_favicon: favicon.ico
+pages:
+- Home: index.md
+- Getting Started: start.md
+- Language Manual: manual.md
+- Community: community.md
+- About: about.md
+theme: cinder
+extra_css:
+    - css/highlight-fix.css
+    - css/darkula.css
