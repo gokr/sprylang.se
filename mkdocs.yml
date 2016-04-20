@@ -12,6 +12,7 @@ pages:
 - Getting Started: start.md
 - Language Manual: manual.md
 - Community: community.md
+- REPL: repl.md
 - About: about.md
 theme: cinder
 extra_css:

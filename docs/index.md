@@ -18,7 +18,7 @@ Mandatory bullet list trying to get you interested:
 * Core interpreter can be compiled **statically to around 100kb in size**
 * Implementation only around **1600 lines of Nim code**
 * Can be compiled via **C, C++ or JavaScript**
-* Has a **REPL** both on command line (ispry) and on the web
+* Has a **REPL** both on command line (ispry) and [here on the website](repl)
 
 The reference implementation of Spry is in Nim, however one idea of Spry is to keep the interpreter simple so that it can be ported to other eco systems, like for example C# or Java. The simple implementation also means Spry is "slow as CPython", but the idea is to easily be able to drop down to Nim for primitive functions in C/C++ speeds where needed. The Spry interpreter is also highly modular and easy to extend further.
 
