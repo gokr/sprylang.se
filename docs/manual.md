@@ -329,6 +329,14 @@ Type literal | Comment
 !!! note
     The Activation node does not yet expose any functionality, but it will eventually be used to open up access to the execution stack etc similar to `thisContext` in Smalltalk. The reason for `root` to not be a reference to the singleton is to avoid a recursive global Map.
 
+### Creating things
+Spry is not a class based language. Things are created either using literal syntax (created at parse time), through specific evaluation mechanisms (maps are created through evaluating curlys) or through cloning already existing things.
+
+Word | Type | Comment
+-----|------|--------
+`clone` | Method | Performs a shallow clone of the receiver node
+
+
 ### Tags
 All nodes of all types in Spry can have a block of tags. Tags are currently limited to being literal words. It's used mainly for Maps which forms the basis of OO in Spry.
 
@@ -358,11 +366,13 @@ Word | Type | Comment
 -----|------|--------
 `+`, `-`, `*`, `/` | Method | Normal arithmetic methods, ints are converted to floats if needed
 
-### Comparions
+### Comparisons
+Word | Type | Comment
+-----|------|--------
 `<`, `>`, `<=`, `>=` | Method | Defined so far for int, float and strings
 
 ### Equality
-In Spry `=` is taken for assignment so we use `==` (and `!=`) for testing equality and `===` for testing identity.
+In Spry `=` is used for assignment so we use `==` (and `!=`) for testing equality and `===` for testing identity.
 
 Word | Type | Comment
 -----|------|--------
@@ -433,6 +443,7 @@ Word | Type | Comment
 `end?` | Method | Return true if position is >= size, which indicates we have reached the end
 
 ### Funcs and Methods
+The core unit of behavior in Spry is funcs and methods. As described above, both work essentially the same, but methods take the first argument (the "receiver") from the left and make it accessible using `self`, you don't use an arg word to pull it in. You use `^` to do an early return, just like in Smalltalk.
 
 Word | Type | Comment
 -----|------|--------
@@ -451,14 +462,16 @@ Word | Type | Comment
 `^` | Func | Takes one argument, evaluates it and performs an early return.
 
 ### Words
+Spry has 11 different kinds of Words. The following funcs can create and convert words in different ways.
+
 Word | Type | Comment
 -----|------|--------
-`reify`
-`sym`
-`litword`
-`word`
+`reify` | Func | Makes a word from a literal word
+`litify` | Func | Makes a literal word from a word
+`quote` | Func | Makes a literal word from an unevaluated word
+`litword` | Func | Makes a literal word from a string
+`word` | Func | Makes a word from a string
 
-`clone`
 
 ### Conditionals
 Spry uses Smalltalk style keyword based conditionals but I decided to rename the Smalltalk variants `ifTrue:`, `ifFalse:`, `ifTrue:ifFalse:`, `ifFalse:ifTrue:` to the slightly shorter `then:`, `else:`, `then:else:`, `else:then:`. 
