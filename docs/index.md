@@ -1,6 +1,6 @@
 # Welcome to Spry!
 
-Spry is a programming language primarily inspired by (and stealing from) Smalltalk/Rebol/Lisp/JavaScript/Forth and Nim.
+Spry is a programming language primarily inspired by Smalltalk/Rebol/Lisp/JavaScript/Forth and Nim.
 
 Spry borrows **homoiconicity** from Rebol and Lisp, **free form syntax** from Forth and Rebol, **the word of different types** from Rebol, **good data structure literal support** from JavaScript and the **general coding experience and style** from Smalltalk. It also has a few ideas of its own, like an interesting argument passing mechanism and a relatively novel take on OO.
 
