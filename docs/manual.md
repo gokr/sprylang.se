@@ -479,11 +479,11 @@ Spry uses Smalltalk style keyword based conditionals but I decided to rename the
 Word | Type | Comment
 -----|------|--------
 `then:` | Method | If receiver is true then evaluate the given block
-`unless:` | Method | If receiver is false then evaluate the given block
+`else:` | Method | If receiver is false then evaluate the given block
 `then:else:` | Method | If receiver is true then evaluate the first block, otherwise the second
-`unless:else:` | Method | If receiver is false then evaluate the first block, otherwise the second
+`else:then:` | Method | If receiver is false then evaluate the first block, otherwise the second
 
-Other variants can easily be implemented in Spry too, like for example reimplementing `then:`, using `then:`. Pointless of course:
+Other variants can easily be implemented in Spry too, like for example implementing `ifTrue:`, using `then:`. Pointless of course:
 
 ```
 ifTrue: = method [:blk self then: [^do blk] nil]
