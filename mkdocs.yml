@@ -14,10 +14,13 @@ markdown_extensions:
     - admonition:
 pages:
 - Home: index.md
-- Getting Started: start.md
 - Language Manual: manual.md
+- Articles:
+    - Getting Started: start.md
+    - Spry vs Smalltalk: spry-vs-smalltalk.md 
 - Community: community.md
 - REPL: repl.md
+
 - About: about.md
 theme: cinder
 extra_css:
