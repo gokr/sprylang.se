@@ -32,7 +32,7 @@ The reference implementation of Spry is in Nim, however one idea of Spry is to k
   n = self
   [n <= to] whileTrue: [
     do block n
-    n = (n + 1)]]
+    ..n = (n + 1)]]
 
 # Then we can loop in Smalltalk style echoing 1 to 5!
 1 to: 5 do: [echo :x]
