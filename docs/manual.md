@@ -35,7 +35,9 @@ The size of a **float** is platform dependent, the Nim compiler chooses the proc
 A **string** is written using double quotes like `"abc"`. Inside the string we replace any `\\` by `\`, any `\'` by `'`, any `\"` by `"` and any `\xHH` (where `HH` is a hexadecimal value) with the corresponding ASCII character. All characters are valid inside the string, including newlines. Examples are `"abc"`, `"hey \"there\""` and `"abc\x0Adef"`.
 
 ## Words
-If it's not a literal, then it's a word. Words are separated from each other using whitespace or any of the composite characters "`()[]{}`". There is also a special set of characters that can only form words together with other characters **from the same set** (or on their own) - "`,;\^&%|~`".
+If it's not a literal, then it's a word. Words are separated from each other using whitespace or any of the composite characters "`()[]{}`". There is also a special set of characters that can only form words together with other characters **from the same set** (or on their own) - "`,;\^&%|~`". Of these only `,`, `;` and `^` are current core spry words, the other characters are still unused.
+
+Note that a word in Spry can be a single character like `=` or `$` or a combination thereof, it doesn't have to be an alphabetic sequence. Words are normally keys bound to values and they are used both as classic "variables" but also for naming functions and other constructs in Spry. This is borrowed from Rebol.
 
 !!! note
     The special characters rule removes some uncomfortable need of whitespace to separate things but you still need whitespace to ensure that words like `=` and `+` are properly parsed for code like `3 + 4` or `x = 14`. Pull requests to fix this in the parser are welcome :)
@@ -95,16 +97,31 @@ All programming languages have more or less complicated rules for evaluation pre
 Then Smalltalk evaluate unary before binary, and binary before keyword messages. This usually removes a lot of parentheses and is quite natural in Smalltalk.
 Rebol has something similar where it evaluates operators before functions.
 
-But in Spry there is no such additional rules. The rule is simply **from left to right**. To do anything different you use parentheses.
+But in Spry there is no such additional rules. The rule is simply **from left to right**. To do anything different you use parentheses!
 
+```python
+x = (3 + 4) # Otherwise Spry assigns only 3 to x
+y = 2 + 3 * 4 # Equals 20
+y = 2 + (3 * 4) # Equals 14
+```
 
 ## Booleans
-There are no literals for booleans (!), but there are two singleton instances of the VM's internal boolean node type (BoolVal) that are bound to the words `true` and `false` in the [root](#root) namespace. That's a mouthful explaining that yes, you can use `true` and `false` pretty much as usual. This design is borrowed from Smalltalk.
+There are no literals for booleans (!), but there are two  [singleton instances](#singletons) of the VM's internal boolean node type (BoolVal) that are bound to the words `true` and `false` in the [root](#root-and-modules) namespace. That's a mouthful explaining that yes, you can use `true` and `false` pretty much as usual. This design is borrowed from Smalltalk.
+
+```python
+x = true
+y = false
+x and y then: [echo "Both are not true"]
+x or y then: [echo "But one is true"]
+y not then: [echo "Y is not true"]
+y else: [echo "Y is not true"]
+
+```
 
 ## Nil and Undef
-In the same manner as booleans we also have the word `nil` bound to the sole instance of the NilVal node type, and `undef` bound to the sole instance of UndefVal.
+In the [same manner](#singletons) as booleans we also have the word `nil` bound to the sole instance of the NilVal node type, and `undef` bound to the sole instance of UndefVal.
 
-Spry is experimenting with distinguishing between `nil` meaning *"no value"* and `undef` meaning *"never assigned any value"*. When a lookup fails you will get `undef`, but if you get `nil` it means the lookup succeeded and the value in question is in fact `nil`. There is a primitive infix function called `?` that checks if a node is `undef`.
+Spry is experimenting with distinguishing between `nil` meaning **nothing** and `undef` meaning **never assigned any value**. For any word the value `nil` is thus a valid value. When a lookup doesn't find any valye for the key and fails you will get `undef`. If you get `nil` it means the lookup succeeded and the value in question is in fact `nil`. There is a primitive method called `?` that checks if a node is `undef`.
 
 ```python
 echo x     # prints "undef"
@@ -152,12 +169,12 @@ map = {x = 50 y = 100}
 ### Map
 As mentioned, the Block is the sequential collection in Spry corresponding to OrderedCollection in Smalltalk. The Map corresponds similarly to Dictionary. All nodes in Spry can be used as keys in a Map. Word nodes come in 11 different types, as earlier described, but when used as keys only the actual word itself is used for hash and equality. This means that when used as keys, `$foo`, `foo` and `:foo` (for example) are all equal since only the actual word "foo" is used for hash and `==`. Literal words on the other hand are always different from each other, for example `'$foo` is different from `'foo`.
 
-## Root and Modules
-Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called `Smalltalk`. In Spry we call it `root`. The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root. If a lookup still fails there is a special Block held in the word `modules` containing Modules that participate in global lookups. A Module is a Map with some extra meta information in it.
+## Root
+Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called `Smalltalk`. In Spry we call it `root`. The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root. If a lookup still fails there is a special Block held in the word `modules` containing [Modules](#Modules) that participate in global lookups. A Module is a Map with some extra meta information in it.
 
-The interpreter will iterate through them and perform the lookup in each one until giving up and returning `undef`. This means Modules will shadow each other depending on their position in the `modules` block. But you can always refer to names directly using Module getwords `Foo::x` or simple Map lookups like `Foo at: 'x`. This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code.
+The interpreter will iterate through the Modules and perform the lookup in each one until giving up and returning `undef`. This means Modules will shadow each other depending on their position in the `modules` block. But you can always refer to names directly using Module getwords `Foo::x` or simple Map lookups like `Foo at: 'x`. This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code. At the same time Modules can be loaded and used even if they do contain naming conflicts.
 
-At the same time Modules can be loaded and used even if they do contain naming conflicts.
+
 
 ## Functions and Methods
 This inevitably brings us to functions, or Funcs as they are called in Spry. Spry is a heavily functional language, in fact, there are **no builtin keywords or operators** at all in Spry - everything is a function, including such fundamental things as assignment `=`.
@@ -272,6 +289,80 @@ echo (add:to: 5 6)    # prints "11"
 echo (3 add:and: 5 6) # prints "14"
 ```
 
+## Scoping
+Spry code is organized in nested Blocks. Each Block is a scope, a closure in fact. And each closure has a Map containing its local bindings, which you can reach explicitly using `locals`. The top level's local bindings are in fact `root`.
+
+Words are what you use to refer to things in Spry so if you use a regular eval word like `foo`, that means **lookup the key "foo" first in the locals and then outwards until reaching the global scope. Then evaluate whatever value is returned from the lookup**. In Spry we don't declare anything, not even local variables like you do in Smalltalk, instead we have 5 different variants of words to reach our bindings, here are all 5 described once more:
+
+```python
+# Lookup in locals and outwards to root and all Modules listed in modules, undef if not found
+foo
+
+# Lookup outside this closure and outwards to root and all Modules listed in modules, undef if not found
+..foo
+
+# Lookup in the Map called Bar, undef if not found
+Bar::foo
+
+# Lookup in self which is the nearest receiver Map
+@foo
+
+# Pull in the next argument to this Block invocation
+:foo
+```
+
+The first 4 variants can also be used as left side in an assignment with these meanings:
+
+```python
+# Bind in locals, regardless of any outer reachable foo's
+foo = 5
+
+# Lookup outside this closure and outwards to root and all Modules listed in modules.
+# If found assign to that foo, otherwise bind in nearest outer closure.
+..foo = 5
+
+# Bind in the Map called Bar
+Bar::foo = 5
+
+# Bind in self which is the nearest receiver Map
+@foo = 5
+```
+The most uncommon effect of these rules is that you often need to use `..foo` as left hand side in assignments being done inside control structure blocks. This is because all blocks are closures and we don't declare locals in Spry so Spry has no way of knowing that you want to assign to the outer `foo` and not a local `foo`. This means that the following code has to be rewritten to work as intended:
+
+```python
+foo = func [ :a
+  x = 10
+  a > 10 then: [x = 20] # This needs to say "..x = 20"
+  ^x]
+
+echo foo 5  # prints 10
+echo foo 12 # still prints 10!
+```
+
+The reason is that `x = 20` sets `x` in the local then-block, not in the outer func block. Rewriting with `..x` solves it, but we can perhaps do this instead:
+
+```python
+foo = func [ :a
+  x = (a > 10 then: [20] else: [10])
+  ^x]
+
+echo foo 5  # prints 10
+echo foo 12 # prints 20
+```
+
+Or even shorter of course:
+
+```python
+foo = func [:a > 10 then: [20] else: [10]]
+
+echo foo 5  # prints 10
+echo foo 12 # prints 20
+```
+For the moment this is a "language wart" - in other words - something I would like to fix but not sure exactly how yet. :)
+
+!!! note 
+    The rules for the left side in assignments are under evaluation. A variant could be that we distinguish between func/method/curly scopes and other blocks.
+    
 ## Standard Library
 The Spry VM includes a very minimal "standard library" in the form of primitive Methods and Funcs, a few Spry only Methods and Funcs and a few singleton nodes. The VM creates the global `root` Map and populates it with words.
 
@@ -301,44 +392,45 @@ Word | Type | Comment
 `;` | Func | Returns the previous receiver, enables Smalltalk style cascades
 `type` | Method | Returns a literal word representing the nodetype, see below.
 
-Type literal | Comment
------|-------------
-`'int`
-`'float`
-`'string`
-`'boolean`
-`'undefined`
-`'novalue`
-`'block`
-`'paren`
-`'curly`
-`'map`
-`'binding`
-`'evalword`
-`'evalmoduleword`
-`'evalselfword`
-`'evalouterword`
-`'evalargword`
-`'getword`
-`'getmoduleword`
-`'getselfword`
-`'getouterword`
-`'getargword`
-`'litword`
+The method `type` returns a literal word representing the type of the receiver node: `'int`, `'float`, `'string`,`'boolean`, `'undefined`, `'novalue`, `'block`, `'paren`, `'curly`, `'map`, `'binding`, `'evalword`, `'evalmoduleword`, `'evalselfword`, `'evalouterword`, `'evalargword`, `'getword`, `'getmoduleword`, `'getselfword`, `'getouterword`, `'getargword`, `'litword`
 
 !!! note
     The Activation node does not yet expose any functionality, but it will eventually be used to open up access to the execution stack etc similar to `thisContext` in Smalltalk. The reason for `root` to not be a reference to the singleton is to avoid a recursive global Map.
 
 ### Creating things
-Spry is not a class based language. Things are created either using literal syntax (created at parse time), through specific evaluation mechanisms (maps are created through evaluating curlys) or through cloning already existing things.
+Spry is not a class based language. Things are created either using literal syntax (created at parse time), through specific evaluation mechanisms (maps are created through evaluating curlys) or through cloning already existing things:
+
+```
+# Literal syntax, created at parse time
+x = "abc"
+y = 12.0
+z = 99
+
+# Composites, created at parse time
+# $ prevents evaluation so that we can hold the paren/curly itself
+paren = $ (1 + 3)
+curly = $ {1 2 3}
+# No need for $ since blocks evaluate to themselves
+block = [1 2 3]
+
+# Create a map through evaluating a curly
+# The curly is created at parse time, but the map
+# is created when we evaluate the curly
+map = {x = 12}
+
+# Cloning at evaluation time, note need for parens
+x = ("abc" clone)
+y = ([1 2 3] clone)
+z = ({x = 12} clone)
+```
 
 Word | Type | Comment
 -----|------|--------
-`clone` | Method | Performs a shallow clone of the receiver node
+`clone` | Method | Performs a copy of strings, does nothing for floats and ints and a performs a shallow copy of blocks, parens, curlys and maps.
 
 
 ### Tags
-All nodes of all types in Spry can have a block of tags. Tags are currently limited to being literal words. It's used mainly for Maps which forms the basis of OO in Spry.
+All nodes of all types in Spry can have a block of tags. Tags are currently limited to being literal words. It's used mainly for Maps and Polymethods which forms the basis of OO in Spry.
 
 Word | Type | Comment
 -----|------|--------
@@ -352,11 +444,27 @@ In Spry we don't have Rebol style "set words", instead we have a word `=` that i
 
 Finally there is no unset word, but you can instead assign to `undef` which will remove the binding.
 
+Currently there is a [language wart](#Language-Warts) that usually forces assignments to be written with parentheses. Spry has no statement separators and does not consider line breaks. You can write a Spry program in one single long line. This means Spry has no simple of knowing when the expression ends. Due to this the current rule is that assignment **only consumes a single node from the right**.
+
+```python
+# You need a paren here because otherwise
+# Spry finds "3" and evaluates it (to 3 obviously)
+# and then assigns that to x.
+x = (3 + 4)
+
+# This works because readFile is a func and when
+# evaluated it will pull in the argument filename 
+x = readFile "afile.txt"
+```
+
+One idea to improve this without introducing separators or making line breaks meaningful (I don't want to do any of those two) is to make evaluation more "eager". Using "look ahead" Spry could check if the word coming after "3" is in fact a method, and then it would continue evaluating it.
+
+
 Word | Type | Comment
 -----|------|--------
-`x = aNode` | Method | Assigns the right hand node to the left hand word x. Left hand side is not evaluated. It can be any kind of word, including a literal word.
+`x = aNode` | Method | Assigns the right hand node to the left hand word x. Left hand side is not evaluated. It can be a literal word or a regular word for local binding. An outer word for binding to an outer closure, or a module word for binding in a Map or Module.
 `x ?` | Method | Checks if x is bound to something. Left hand side is not evaluated. It can be any kind of word, including a literal word.
-`x set: aNode` | Method | Assigns the right hand node to the left hand literal word. Left hand side is evaluated and should evaluate to a literal word. 
+`x set: aNode` | Method | Assigns the right hand node to the left hand literal word. Left hand side is evaluated and should evaluate to a word which is used through the same rules as `=`. 
 `x set?` | Method | Checks if x is bound to something. Left hand side is evaluated and should evaluate to a word.
 
 ### Arithmetic
