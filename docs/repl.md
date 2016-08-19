@@ -1,5 +1,7 @@
 # Spry JavaScript REPL
-On this page we have the Spy interpreter compiled and minified to [about 97kb ugly js](repl/spry.js). You can enter code and eval below, output is appended below the code area.
+On this page we have the Spy interpreter compiled, together with 7 extra VM modules (debug, extend, math, OO, string, modules, reflect) and minified to [about 126kb ugly js](repl/spry.js).
+
+You can enter code and eval below, output is appended below the code area.
 
 <div style="text-align:left;margin:0px 0px"> 
 
