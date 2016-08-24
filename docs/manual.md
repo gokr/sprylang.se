@@ -100,13 +100,13 @@ Rebol has something similar where it evaluates operators before functions.
 But in Spry there is no such additional rules. The rule is simply **from left to right**. To do anything different you use parentheses!
 
 ```python
-x = (3 + 4) # Otherwise Spry assigns only 3 to x
-y = 2 + 3 * 4 # Equals 20
-y = 2 + (3 * 4) # Equals 14
+x = (3 + 4)       # Otherwise Spry assigns only 3 to x
+y = (2 + 3 * 4)   # Equals 20
+y = (2 + (3 * 4)) # Equals 14
 ```
 
 ## Booleans
-There are no literals for booleans (!), but there are two  [singleton instances](#singletons) of the VM's internal boolean node type (BoolVal) that are bound to the words `true` and `false` in the [root](#root-and-modules) namespace. That's a mouthful explaining that yes, you can use `true` and `false` pretty much as usual. This design is borrowed from Smalltalk.
+There are no literals for booleans (!), but there are two  [singleton instances](#singletons) of the VM's internal boolean node type (BoolVal) that are bound to the words `true` and `false` in the [root](#Root) namespace. That's a mouthful explaining that yes, you can use `true` and `false` pretty much as usual. This design is borrowed from Smalltalk.
 
 ```python
 x = true
@@ -170,7 +170,9 @@ map = {x = 50 y = 100}
 As mentioned, the Block is the sequential collection in Spry corresponding to OrderedCollection in Smalltalk. The Map corresponds similarly to Dictionary. All nodes in Spry can be used as keys in a Map. Word nodes come in 11 different types, as earlier described, but when used as keys only the actual word itself is used for hash and equality. This means that when used as keys, `$foo`, `foo` and `:foo` (for example) are all equal since only the actual word "foo" is used for hash and `==`. Literal words on the other hand are always different from each other, for example `'$foo` is different from `'foo`.
 
 ## Root
-Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called `Smalltalk`. In Spry we call it `root`. The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root. If a lookup still fails there is a special Block held in the word `modules` containing [Modules](#Modules) that participate in global lookups. A Module is a Map with some extra meta information in it.
+Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called `Smalltalk`, in Spry we call it `root`.
+
+The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root. If a lookup still fails there is a special Block held in the word `modules` containing [Modules](#Modules) that participate in global lookups. A Module is a Map with some extra meta information in it.
 
 The interpreter will iterate through the Modules and perform the lookup in each one until giving up and returning `undef`. This means Modules will shadow each other depending on their position in the `modules` block. But you can always refer to names directly using Module getwords `Foo::x` or simple Map lookups like `Foo at: 'x`. This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code. At the same time Modules can be loaded and used even if they do contain naming conflicts.
 
@@ -195,7 +197,7 @@ foo = func [3 + 4]
 foo
 ```
 
-A Func **evaluates the code when it's evaluated**. This is in contrast to a Block which evaluates to itself. The return value of a Func is either the result of the last expression or you can return explicitly using the primitive return Func using the same character as in Smalltalk, `^`.
+A Func **evaluates the block when it's evaluated**. This is in contrast to a Block which evaluates to itself. The return value of a Func is either the result of the last expression or you can return explicitly using the primitive return Func using the same character as in Smalltalk, `^`. Another important aspect of Funcs is that they are not polymorphic, or in other words, you can not overload them for different types of the arguments. However, several of the builtin core Funcs perform a bit of "type testing" internally so that you can indeed call them with different types of arguments and they handle them properly. For true polymorphic behaviors you should use (Polymethods](#Polymethods) in Spry.
 
 Funcs use prefix calling and they are called just like in Rebol:
 
@@ -252,7 +254,7 @@ The reason we use `echo $x` is to prevent `x` from being evaluated inside the fu
 
 ### Methods
 
-Methods are just like Funcs but they always take at least one argument, from the left. This mandatory "receiver" is accessible using the primitive func `self`, so no need to use an arg word to pull it in.
+Methods are just like Funcs but they always take at least one argument, from the left. This mandatory "receiver" is accessible using the primitive func `self`, so no need to use an arg word to pull it in. This means Methods "feel" like OO messages, but they are still not polymorphic based on the receiver, again you should use [Polymethods](#Polymethod) for that.
 
 ```python
 # Call method foo on an int
@@ -640,11 +642,52 @@ select:
 
 
 ## Modules
+Modules in Spry are simply Maps.
 
 
+## VM Modules
+Core Spry comes with a bunch of assorted VM modules. A VM module is a separate Nim package that has a Nim proc that "adds it" to a Spry Interpreter instance. The idea is that when you build a Spry VM you pick which VM modules you want to include and then call them one by one. The standard Spry VM has a section that looks something like this:
+```nim
+import spryextend, sprymath, spryos, spryio, sprythread,
+ spryoo, sprydebug, sprycompress, sprystring, sprymodules,
+ spryreflect, spryui
 
+var spry = newInterpreter()
 
+# Add extra modules
+spry.addExtend()
+spry.addMath()
+spry.addOS()
+spry.addIO()
+spry.addThread()
+spry.addOO()
+spry.addDebug()
+spry.addCompress()
+spry.addString()
+spry.addModules()
+spry.addReflect()
+spry.addUI()
+```
+Here we see that the regular VM imports a bunch of VM modules at the top, and then calls `addXXX` for each one. Let's look closer at the LZ4 compression VM module called `sprycompress.nim`:
 
+```nim
+import lz4
+import spryvm
+
+# Spry compression
+proc addCompress*(spry: Interpreter) =
+  # Compression of string
+  nimFunc("compress"):
+    newValue(compress(StringVal(evalArg(spry)).value, level=1))
+  nimFunc("uncompress"):
+    newValue(uncompress(StringVal(evalArg(spry)).value))
+```
+
+The name `addXXX` is just convention, but it must take an argument spry of type `aInterpreter`. Then in that proc we can do several things, but perhaps most importantly we can add primitives to Spry. We typically do that using the Nim templates `nimFunc` and `nimMeth`. A primitive is given a name and the code has access to the Interpreter via `spry`. Using Nim procs like `evalArg(spry)` we can pull in the next argument (`evalArgInfix(spry)` pulls in the receiver from the left) and at the end the primitive must return a `Node`. `newValue` will create the proper Node from a bunch of Nim types.
+
+The templates `nimFunc` and `nimMeth` will then create a NimFunc (or NimMeth) node and bind it to the name given in the Spry `root` Map.
+
+By looking at the various VM modules you can easily see how to make your own! It's easy.
 
 ## Spry grammar
 
