@@ -14,6 +14,7 @@ markdown_extensions:
     - admonition:
 pages:
 - Home: index.md
+- News: news.md
 - Language Manual: manual.md
 - Articles:
     - Getting Started: start.md

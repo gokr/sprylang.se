@@ -22,7 +22,7 @@ Spry has three standard literals; **int**, **float** and **string**. A literal i
 It is worth noting that the literal nodes are created during parsing and not during evaluation.
 
 !!! note
-    The Spry VM also supports **pluggable literals** so you can easily add your own new literals in extra Spry VM modules,
+    The Spry VM also supports **pluggable literals** so you can easily add your own new literals in extra Spry [VM modules](#vm-modules),
     there is an example in the module `spryextend.nim` that adds support for multiline string literals.
 
 ### Literal int
@@ -172,10 +172,13 @@ As mentioned, the Block is the sequential collection in Spry corresponding to Or
 ## Root
 Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called `Smalltalk`, in Spry we call it `root`.
 
-The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root. If a lookup still fails there is a special Block held in the word `modules` containing [Modules](#Modules) that participate in global lookups. A Module is a Map with some extra meta information in it.
+The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like `true`, `false` etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root.
 
-The interpreter will iterate through the Modules and perform the lookup in each one until giving up and returning `undef`. This means Modules will shadow each other depending on their position in the `modules` block. But you can always refer to names directly using Module getwords `Foo::x` or simple Map lookups like `Foo at: 'x`. This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code. At the same time Modules can be loaded and used even if they do contain naming conflicts.
+If a lookup still fails there is a special Block held in the word `modules` containing all [Modules](#modules) that we want should participate in global lookups, in the order they are in that block. A [Module](#modules) is just a Map with some extra meta information in it.
 
+The interpreter will iterate through the Modules and perform the lookup in each one until finding a hit, or giving up and returning `undef`. This means Modules will shadow each other depending on their position in the `modules` block. But you can always refer to names directly using Module getwords `Foo::x` or simple Map lookups like `Foo at: 'x`.
+
+This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code. At the same time Modules can be loaded and used even if they do contain naming conflicts.
 
 
 ## Functions and Methods
@@ -183,9 +186,9 @@ This inevitably brings us to functions, or Funcs as they are called in Spry. Spr
 
 Funcs can be written either as "primitives" in [Nim](http://nim-lang.org) or in Spry of course. The Spry VM has a bunch of Funcs included internally, most of which are primitives but also some defined in Spry.
 
-Then there are [VMModules](#VMModules) that define more Funcs, again both primitives and Spry funcs. VMModules are linked into the VM when you build the Spry VM, currently statically but they could be made to load dynamically as .so/.dlls too.
+Then there are [VM modules](#vm-modules) that define more Funcs, again both primitives and Spry funcs. VM Modules are linked into the VM when you build the Spry VM, currently statically but they could be made to load dynamically as .so/.dlls too.
 
-Finally Spry also has [Modules](#Modules) that are pure Spry.
+Finally Spry also has [Modules](#modules) that are pure Spry.
 
 ### Func
 Functions are created from Blocks using the `func` function that takes a Block of code, performs a shallow copy of it to create a Func and returns it:
@@ -642,8 +645,67 @@ select:
 
 
 ## Modules
-Modules in Spry are simply Maps.
+Modules in Spry are simply Maps with an additional entry under the key `_meta` with a Map containing the meta information about the Module. Here is an example:
 
+```python
+{
+  _meta = {
+    name = 'Foo
+    version = "1.0"
+    description = "Testing module closure"
+  }
+
+  # Local baz. The Map itself is the lexical parent of the funcs we create below.
+  # That means that lookups inside the funcs will continue outwards through the Map. 
+  baz = 1
+  
+  # Here we rely on a baz in this module, or else in the global scope
+  bar = func [:x + baz]
+  
+  # Here we make sure to use the module baz, avoiding the local one inside the func
+  bar2 = func [ baz = 99 :x + ..baz]
+
+  # Here we use Foo::baz, which will resolve to 1 if this module is indeed loaded as Foo
+  bar3 = func [:x + Foo::baz]
+}
+```
+As we can see the above is just Spry syntax for a [Map](#map) and the Map contains 3 funcs and one "variable" called `baz`. If we put this in `foo.sy` - the filename is not important and can be anything - we can then load this module into Spry using `loadFile: "foo.sy"`. The default behavior is to load and bind the module to the name in `_meta` as a global in `root`. Then we can manipulate it and reach it's members using `Foo::xxx` syntax:
+
+```python
+# Load the module as the name it has in the neta information
+loadFile: "foo.sy"
+
+# We can now access stuff in Foo, should print 1
+echo Foo::baz
+
+# Run the bar func with 1 as argument, should print 2
+echo Foo::bar 1
+
+# Set a global value for baz
+baz = 10
+
+# This should return 2
+echo Foo::bar2 1
+
+# And this should return 2
+echo Foo::bar3 1
+
+# If we throw away Foo and load it as Zoo
+Foo = undef
+loadFile: "foo.sy" as: 'Zoo
+
+# Then all works the same, should print 2
+echo Zoo::bar 1
+
+# Create a different Foo, so that bar3 finds something
+Foo = {baz = 8}
+
+# Should print 9
+echo Zoo::bar3 1
+```
+
+Finally, we can also add modules to the special block called `modules` which is used by the lookup machinery in Spry. Lookups go outwards lexically all the way up to `root` and if it fails Spry then looks in each module listed in `modules` until giving up and returning `undef`.
+ 
 
 ## VM Modules
 Core Spry comes with a bunch of assorted VM modules. A VM module is a separate Nim package that has a Nim proc that "adds it" to a Spry Interpreter instance. The idea is that when you build a Spry VM you pick which VM modules you want to include and then call them one by one. The standard Spry VM has a section that looks something like this:
