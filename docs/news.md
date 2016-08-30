@@ -1,5 +1,10 @@
 # News
 
+## Created Google Group
+_2016-08-29_
+
+A mailinglist forum is great for a programming language IMHO, we have gitter but for more lengthy "out-of-band" discussions I prefer a list. Here it is: [https://groups.google.com/forum/#!forum/sprylang](https://groups.google.com/forum/#!forum/sprylang)
+
 ## Benchmarking Spry vs Squeak 5.1
 _2016-08-26_
 
