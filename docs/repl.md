@@ -1,5 +1,5 @@
 # Spry JavaScript REPL
-On this page we have the Spy interpreter compiled, together with 7 extra VM modules (debug, extend, math, OO, string, modules, reflect) and minified to [about 126kb ugly js](repl/spry.js).
+On this page we have the Spy interpreter compiled, together with 10 extra VM modules (core, debug, extend, math, OO, string, modules, reflect, block and browser) and minified to [about 126kb ugly js](repl/spry.js). You can find this [in github](https://github.com/gokr/spry/tree/master/samples/browser/).
 
 You can enter code and eval below, output is appended below the code area.
 
@@ -8,9 +8,12 @@ You can enter code and eval below, output is appended below the code area.
 <script type="text/javascript" src="shortcut.js"></script>
 <script type="text/javascript" src="spry.js"></script>
 <script type="text/javascript">
-function evalInSpry(code) {
-  document.getElementById('output').appendChild(document.createTextNode(spryEval(code)))
+function echoSpry(html) {
+  document.getElementById('output').appendChild(document.createTextNode(html))
   document.getElementById('output').appendChild(document.createElement('br'))
+}
+function evalInSpry(code) {
+  echoSpry(spryEval(code))
 }
 shortcut.add("ctrl+enter", function() {
   evalInSpry(document.getElementById('code').value)
