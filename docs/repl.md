@@ -1,5 +1,5 @@
 # Spry JavaScript REPL
-On this page we have the Spy interpreter compiled, together with 10 extra VM modules (core, debug, extend, math, OO, string, modules, reflect, block and browser) and minified to [about 126kb ugly js](repl/spry.js). You can find this [in github](https://github.com/gokr/spry/tree/master/samples/browser/).
+On this page we have the Spry interpreter compiled, together with 10 extra VM modules (core, debug, extend, math, OO, string, modules, reflect, block and browser) and minified to [about 126kb ugly js](repl/spry.js). You can find this [in github](https://github.com/gokr/spry/tree/master/samples/browser/).
 
 You can enter code and eval below, output is appended below the code area.
 
