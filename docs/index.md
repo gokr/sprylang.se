@@ -54,7 +54,7 @@ echo ([1 2 3 4] select: [:x > 2])
 
 The future vision of Spry is to support **100% live coding** in a Smalltalk style **immersive environment** with advanced tools, but being much more integrated with the various eco systems outside of Spry. Think Smalltalk, but distilled to the core and without the island isolation.
 
-I also wish to explore the live image model in a distributed multi user scenario by using [modern database](http://sphia.org), cloud and networking technology. Yeah, not entirely super clear but if you know about [GemStone/S](https://gemtalksystems.com/products/gs64/), try visualize that on a global cloud scale, although simplified in architecture.
+I also wish to explore the live image model in a distributed multi user scenario by using [modern database](http://sophia.systems/), cloud and networking technology. Yeah, not entirely super clear but if you know about [GemStone/S](https://gemtalksystems.com/products/gs64/), try visualize that on a global cloud scale, although simplified in architecture.
 
 Join for the fun!
 
