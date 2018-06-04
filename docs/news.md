@@ -1,5 +1,10 @@
 # News
 
+## New Top Level Domain
+_2018-06-04_
+
+For various reasons Spry now lives at [Sprylang.se](http://sprylang.se).
+
 ## Created Google Group
 _2016-08-29_
 
