@@ -9,7 +9,6 @@ Mandatory bullet list trying to get you interested:
 * A **dynamically typed** minimalistic language with a **very flexible free form syntax**
 * Is truly **homoiconic** where everything is an AST node
 * No builtin keywords, **all computation are functions including assignment**
-* Macro like mechanisms for code manipulation
 * Both **prefix and infix** function syntax including support for Smalltalk **keyword syntax**
 * Very lightweight **lambdas** called blocks that are **proper closures**
 * Uses Smalltalk style **non local return**
@@ -20,7 +19,7 @@ Mandatory bullet list trying to get you interested:
 * Can be compiled via **C, C++ or JavaScript**
 * Has a **REPL** both on command line (ispry) and [here on the website](repl)
 
-The reference implementation of Spry is in Nim, however one idea of Spry is to keep the interpreter simple so that it can be ported to other eco systems, like for example C# or Java. The simple implementation also means Spry is "slow as CPython", but the idea is to easily be able to drop down to Nim for primitive functions in C/C++ speeds where needed. The Spry interpreter is also highly modular and easy to extend further.
+The reference implementation of Spry is in Nim, however one idea of Spry is to keep the interpreter simple so that it can be ported to other eco systems, like for example Dart, C# or Java. The simple implementation also means Spry is "slow as CPython", but the idea is to easily be able to drop down to Nim for primitive functions in C/C++ speeds where needed. The Spry interpreter is also highly modular and easy to extend further.
 
 ## Taste it
 
@@ -28,7 +27,7 @@ The reference implementation of Spry is in Nim, however one idea of Spry is to k
 # Let's add a method to:do: that works as in Smalltalk.
 # Methods take the first argument, the "receiver", from the left
 # and binds it to "self".
-'to:do: = method [:to :block
+to:do: = method [:to :block
   n = self
   [n <= to] whileTrue: [
     do block n
@@ -38,7 +37,7 @@ The reference implementation of Spry is in Nim, however one idea of Spry is to k
 1 to: 5 do: [echo :x]
 
 # We can similarly implement select: from Smalltalk
-'select: = method [:pred
+select: = method [:pred
   result = ([] clone)
   self reset
   [self end?] whileFalse: [
@@ -49,6 +48,7 @@ The reference implementation of Spry is in Nim, however one idea of Spry is to k
 # Then use it to produce [3 4]
 echo ([1 2 3 4] select: [:x > 2])
 ```
+In fact... both the above methods are now available as primitive-methods in Spry, so not needed to be implemented like above - but it still works.
 
 ## Vision of Spry
 

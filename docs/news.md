@@ -1,5 +1,10 @@
 # News
 
+## Discord server
+_2019-07-30_
+
+I really like Discord for most of my chat needs these days, so I created a [Spry server](https://discord.gg/mK8HZNd) - join in!
+
 ## New Top Level Domain
 _2018-06-04_
 
