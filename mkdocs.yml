@@ -16,8 +16,8 @@ pages:
 - Home: index.md
 - News: news.md
 - Language Manual: manual.md
+- Getting Started: start.md
 - Articles:
-    - Getting Started: start.md
     - Spry vs Smalltalk: spry-vs-smalltalk.md 
 - Community: community.md
 - REPL: repl.md

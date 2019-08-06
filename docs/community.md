@@ -8,4 +8,7 @@ We are... eh, not that many yet - so please join! The [gitter room](http://gitte
 * [http://github.com/gokr/spry](http://github.com/gokr/spry) - The source Luke!
 
 
+## Links
+
 * [http://goran.krampe.se/category/spry](http://goran.krampe.se/category/spry) - My articles on Spry on my blog
+* [A little article on Ni](https://forums.theregister.co.uk/forum/all/2015/09/18/we_are_the_knights_who_code_ni/)
