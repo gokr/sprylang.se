@@ -157,7 +157,7 @@ do foo
     Yes, in Spry we use the same convention as in Nim regarding indexing - first element is at position 0.
 
 ### Paren
-In most programming languages parentheses are only used to control evaluation order and do not reify as anything concrete during execution. In Rebol and Spry however, `(1 + 2)` reify as a Paren when parsed. A Paren is a Composite internally just like a Block is, but when evaluated **a Paren evaluates itself as code without creating a new closure and the result is the result of the last expression**. It can be used pretty much as parentheses are used traditionally.
+In most programming languages parentheses are only used to control evaluation order and do not reify as anything concrete during execution. In Rebol and Spry however, `(1 + 2)` reify as a Paren when parsed. A Paren is a Composite internally just like a Block is, but when evaluated **a Paren evaluates itself as code without creating a new closure and the result is the result of the last expression** (all other Block properties and behavior is preserved - hence Paren has also its own Activation). In other words `(...)` is an equivalent of `do [...]` (but more efficient). It can be used pretty much as parentheses are used traditionally.
 
 ### Curly
 The third Composite is the Curly which is written like `{a b c}`. It reifies as a Curly when parsed, which also is a Composite internally just like a Block. When a Curly is evaluated **it evaluates itself like a Block does in its own closure, but the result is the locals Map of the closure**. The net effect of that is that we use Curlys to create Maps:

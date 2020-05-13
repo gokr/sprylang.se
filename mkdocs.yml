@@ -18,7 +18,7 @@ pages:
 - Language Manual: manual.md
 - Getting Started: start.md
 - Articles:
-    - Spry vs Smalltalk: spry-vs-smalltalk.md 
+    - Spry vs Smalltalk: spry-vs-smalltalk.md
 - Community: community.md
 - REPL: repl.md
 
