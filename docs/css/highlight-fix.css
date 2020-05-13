@@ -37,3 +37,9 @@ code {
     font-weight: bold;
     text-align: left;
 }
+
+/* fix inaccessible longer navigations on devices with smaller heights */
+.navbar-light {
+    overflow-y: scroll;
+    max-height: 25rem;
+}
