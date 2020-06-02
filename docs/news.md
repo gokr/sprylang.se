@@ -1,5 +1,10 @@
 # News
 
+## Refreshed web site
+_2020-06-02_
+
+Refreshed web site with new theme for MkDocs and fixed the web site REPL.
+
 ## Discord server
 _2019-07-30_
 
