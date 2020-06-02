@@ -2,16 +2,13 @@ site_name: Spry Language
 site_url: http://sprylang.se
 site_dir: www
 copyright: "Spry is licensed under the <a href='https://github.com/gokr/spry/blob/master/LICENSE'>MIT license"
-repo_name: GitHub
-repo_url: http://github.com/gokr/spry
+repo_name: gokr/spry
+repo_url: https://github.com/gokr/spry
 site_description: The Spry Programming language homepage
 site_author: Göran Krampe
 site_favicon: favicon.ico
 use_directory_urls: false
-markdown_extensions:
-    - toc:
-        permalink: " #"
-    - admonition:
+
 pages:
 - Home: index.md
 - News: news.md
@@ -21,9 +18,34 @@ pages:
     - Spry vs Smalltalk: spry-vs-smalltalk.md 
 - Community: community.md
 - REPL: repl.md
-
 - About: about.md
-theme: cinder
-extra_css:
-    - css/highlight-fix.css
-    - css/darkula.css
+
+# Configuration
+theme:
+  name: material
+  language: en
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# Extras
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/gokr/spry
+
+# Google Analytics
+#google_analytics:
+#  - UA-XXXXXXXX-X
+#  - auto
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
