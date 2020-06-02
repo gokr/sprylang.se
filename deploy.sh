@@ -1,2 +1,2 @@
-~/.local/bin/mkdocs build --clean
+mkdocs build --clean
 rsync -a www/* sprylang.se:/home/gokr/spry/
