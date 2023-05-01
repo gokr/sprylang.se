@@ -6,10 +6,10 @@ repo_name: gokr/spry
 repo_url: https://github.com/gokr/spry
 site_description: The Spry Programming language homepage
 site_author: Göran Krampe
-site_favicon: favicon.ico
+#site_favicon: favicon.ico
 use_directory_urls: false
 
-pages:
+nav:
 - Home: index.md
 - News: news.md
 - Language Manual: manual.md
