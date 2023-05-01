@@ -1,6 +1,7 @@
 site_name: Spry Language
 site_url: http://sprylang.se
-site_dir: www
+site_dir: docs
+docs_dir: src
 copyright: "Spry is licensed under the <a href='https://github.com/gokr/spry/blob/master/LICENSE'>MIT license"
 repo_name: gokr/spry
 repo_url: https://github.com/gokr/spry
