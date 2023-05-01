@@ -1,0 +1,2449 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Spry Programming language homepage">
+      
+      
+        <meta name="author" content="Göran Krampe">
+      
+      
+        <link rel="canonical" href="http://sprylang.se/manual.html">
+      
+      
+        <link rel="prev" href="news.html">
+      
+      
+        <link rel="next" href="start.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+    
+    
+      
+        <title>Language Manual - Spry Language</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#language-manual" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Spry Language" class="md-header__button md-logo" aria-label="Spry Language" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Spry Language
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Language Manual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gokr/spry" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gokr/spry
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Spry Language" class="md-nav__button md-logo" aria-label="Spry Language" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Spry Language
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gokr/spry" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gokr/spry
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="news.html" class="md-nav__link">
+        News
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Language Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="manual.html" class="md-nav__link md-nav__link--active">
+        Language Manual
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    Comments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literals" class="md-nav__link">
+    Literals
+  </a>
+  
+    <nav class="md-nav" aria-label="Literals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#literal-int" class="md-nav__link">
+    Literal int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-float" class="md-nav__link">
+    Literal float
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-string" class="md-nav__link">
+    Literal string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#words" class="md-nav__link">
+    Words
+  </a>
+  
+    <nav class="md-nav" aria-label="Words">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-word" class="md-nav__link">
+    Get word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eval-word" class="md-nav__link">
+    Eval word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-word" class="md-nav__link">
+    Literal word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    Keywords
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precedence" class="md-nav__link">
+    Precedence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nil-and-undef" class="md-nav__link">
+    Nil and Undef
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composites" class="md-nav__link">
+    Composites
+  </a>
+  
+    <nav class="md-nav" aria-label="Composites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block" class="md-nav__link">
+    Block
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paren" class="md-nav__link">
+    Paren
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curly" class="md-nav__link">
+    Curly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    Map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root" class="md-nav__link">
+    Root
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-and-methods" class="md-nav__link">
+    Functions and Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions and Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func" class="md-nav__link">
+    Func
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scoping" class="md-nav__link">
+    Scoping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-library" class="md-nav__link">
+    Standard Library
+  </a>
+  
+    <nav class="md-nav" aria-label="Standard Library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singletons" class="md-nav__link">
+    Singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reflection" class="md-nav__link">
+    Reflection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-things" class="md-nav__link">
+    Creating things
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    Tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignments" class="md-nav__link">
+    Assignments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic" class="md-nav__link">
+    Arithmetic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparisons" class="md-nav__link">
+    Comparisons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equality" class="md-nav__link">
+    Equality
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleans_1" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenation" class="md-nav__link">
+    Concatenation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversions" class="md-nav__link">
+    Conversions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composites_1" class="md-nav__link">
+    Composites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks" class="md-nav__link">
+    Blocks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcs-and-methods" class="md-nav__link">
+    Funcs and Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation" class="md-nav__link">
+    Evaluation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#words_1" class="md-nav__link">
+    Words
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditionals" class="md-nav__link">
+    Conditionals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polymethod" class="md-nav__link">
+    Polymethod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spry-library" class="md-nav__link">
+    Spry library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-modules" class="md-nav__link">
+    VM Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spry-grammar" class="md-nav__link">
+    Spry grammar
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="start.html" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Articles
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Articles
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spry-vs-smalltalk.html" class="md-nav__link">
+        Spry vs Smalltalk
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="community.html" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repl.html" class="md-nav__link">
+        REPL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    Comments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literals" class="md-nav__link">
+    Literals
+  </a>
+  
+    <nav class="md-nav" aria-label="Literals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#literal-int" class="md-nav__link">
+    Literal int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-float" class="md-nav__link">
+    Literal float
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-string" class="md-nav__link">
+    Literal string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#words" class="md-nav__link">
+    Words
+  </a>
+  
+    <nav class="md-nav" aria-label="Words">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-word" class="md-nav__link">
+    Get word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eval-word" class="md-nav__link">
+    Eval word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literal-word" class="md-nav__link">
+    Literal word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    Keywords
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precedence" class="md-nav__link">
+    Precedence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nil-and-undef" class="md-nav__link">
+    Nil and Undef
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composites" class="md-nav__link">
+    Composites
+  </a>
+  
+    <nav class="md-nav" aria-label="Composites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block" class="md-nav__link">
+    Block
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paren" class="md-nav__link">
+    Paren
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curly" class="md-nav__link">
+    Curly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    Map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root" class="md-nav__link">
+    Root
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-and-methods" class="md-nav__link">
+    Functions and Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions and Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func" class="md-nav__link">
+    Func
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scoping" class="md-nav__link">
+    Scoping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-library" class="md-nav__link">
+    Standard Library
+  </a>
+  
+    <nav class="md-nav" aria-label="Standard Library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singletons" class="md-nav__link">
+    Singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reflection" class="md-nav__link">
+    Reflection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-things" class="md-nav__link">
+    Creating things
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    Tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignments" class="md-nav__link">
+    Assignments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic" class="md-nav__link">
+    Arithmetic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparisons" class="md-nav__link">
+    Comparisons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equality" class="md-nav__link">
+    Equality
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleans_1" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenation" class="md-nav__link">
+    Concatenation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversions" class="md-nav__link">
+    Conversions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composites_1" class="md-nav__link">
+    Composites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks" class="md-nav__link">
+    Blocks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcs-and-methods" class="md-nav__link">
+    Funcs and Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation" class="md-nav__link">
+    Evaluation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#words_1" class="md-nav__link">
+    Words
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditionals" class="md-nav__link">
+    Conditionals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polymethod" class="md-nav__link">
+    Polymethod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spry-library" class="md-nav__link">
+    Spry library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-modules" class="md-nav__link">
+    VM Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spry-grammar" class="md-nav__link">
+    Spry grammar
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="language-manual">Language Manual<a class="headerlink" href="#language-manual" title="Permanent link">&para;</a></h1>
+<p><strong>IN PROGRESS!!!!</strong></p>
+<p>Spry code consists solely of <strong>comments, literals, words and composites</strong> separated by whitespace.</p>
+<p>In Spry <strong>everything is an AST node</strong>, hereafter referred to as a <strong>node</strong>. The parsing step produces an AST (Abstract Syntax Tree) of such nodes from a string of code. This AST fully mirrors the Spry syntax. The nodes can then be evaluated. This means the Spry VM executes the AST directly without compiling it further to bytecodes or native code.</p>
+<h2 id="comments">Comments<a class="headerlink" href="#comments" title="Permanent link">&para;</a></h2>
+<p>In Spry a comment begins with a <code>#</code> parsed outside literals and consumes the rest of the line. This is the only syntax for comments.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Comments can be on their</span>
+<span class="c1"># own lines but each line must start with a #</span>
+<span class="n">echo</span> <span class="s2">&quot;Hey&quot;</span> <span class="c1"># But they can also begin after code</span>
+<span class="n">echo</span> <span class="s2">&quot;Comments begin with # but they can not start inside literals&quot;</span>
+</code></pre></div>
+
+<h2 id="literals">Literals<a class="headerlink" href="#literals" title="Permanent link">&para;</a></h2>
+<p>Spry has three standard literals; <strong>int</strong>, <strong>float</strong> and <strong>string</strong>. A literal is a specific syntax that the parser can identify and solely from that - create the proper type of node. Te nodes created are "boxed" Nim values of the corresponding Nim types <code>int</code>, <code>float</code> and <code>string</code>.</p>
+<p>It is worth noting that the literal nodes are created during parsing and not during evaluation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Spry VM also supports <strong>pluggable literals</strong> so you can easily add your own new literals in extra Spry <a href="#vm-modules">VM modules</a>,
+there is an example in the module <code>spryextend.nim</code> that adds support for multiline string literals.</p>
+</div>
+<h3 id="literal-int">Literal int<a class="headerlink" href="#literal-int" title="Permanent link">&para;</a></h3>
+<p>An <strong>int</strong> is signed and its size is platform dependent and has the same size as a pointer. <code>_</code> is allowed inside an integer literal and is ignored, it can make big numbers easier to read like <code>340_000_000</code>. Examples are <code>42</code>, <code>-34</code>, <code>+12</code>.</p>
+<h3 id="literal-float">Literal float<a class="headerlink" href="#literal-float" title="Permanent link">&para;</a></h3>
+<p>The size of a <strong>float</strong> is platform dependent, the Nim compiler chooses the processor's fastest floating point type. The literal syntax supports exponents using either <code>e</code> or <code>E</code> and also ignores any embedded <code>_</code>. Examples are <code>3.14</code>, <code>4e2</code>, <code>-2.734e-3</code> and <code>40.00_001e2</code>.</p>
+<h3 id="literal-string">Literal string<a class="headerlink" href="#literal-string" title="Permanent link">&para;</a></h3>
+<p>A <strong>string</strong> is written using double quotes like <code>"abc"</code>. Inside the string we replace any <code>\\</code> by <code>\</code>, any <code>\'</code> by <code>'</code>, any <code>\"</code> by <code>"</code> and any <code>\xHH</code> (where <code>HH</code> is a hexadecimal value) with the corresponding ASCII character. All characters are valid inside the string, including newlines. Examples are <code>"abc"</code>, <code>"hey \"there\""</code> and <code>"abc\x0Adef"</code>.</p>
+<h2 id="words">Words<a class="headerlink" href="#words" title="Permanent link">&para;</a></h2>
+<p>If it's not a literal, then it's a word. Words are separated from each other using whitespace or any of the composite characters "<code>()[]{}</code>". There is also a special set of characters that can only form words together with other characters <strong>from the same set</strong> (or on their own) - "<code>,;\^&amp;%|~</code>". Of these only <code>,</code>, <code>;</code> and <code>^</code> are current core spry words, the other characters are still unused.</p>
+<p>Note that a word in Spry can be a single character like <code>=</code> or <code>$</code> or a combination thereof, it doesn't have to be an alphabetic sequence. Words are normally keys bound to values and they are used both as classic "variables" but also for naming functions and other constructs in Spry. This is borrowed from Rebol.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The special characters rule removes some uncomfortable need of whitespace to separate things but you still need whitespace to ensure that words like <code>=</code> and <code>+</code> are properly parsed for code like <code>3 + 4</code> or <code>x = 14</code>. Pull requests to fix this in the parser are welcome :)</p>
+</div>
+<p>Words come in different types depending on prefixing characters. The word type dictates the behavior when the word is evaluated:</p>
+<ol>
+<li>A <strong>Get word</strong> is prefixed with <code>$</code>.</li>
+<li>An <strong>Eval word</strong> has no prefix. This is the most common word.</li>
+<li>A <strong>Literal word</strong> is prefixed with <code>'</code>.</li>
+</ol>
+<p>Get and Eval words also come in 5 different variants, totalling 11 different concrete word types.</p>
+<p>Finally we also have <strong>Keywords</strong> which is simply a "syntactical sugar" in the Spry parser that enables Smalltalk style keyword calls.</p>
+<h3 id="get-word">Get word<a class="headerlink" href="#get-word" title="Permanent link">&para;</a></h3>
+<p>When evaluated, a get word simply performs a lookup using the word itself as the key and the result is the node found. Get words are used when you want to refer to something by name and make sure you only perform the lookup. This way you can refer to for example functions without evaluating them.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In many other languages you refer to the function itself using it's name like <code>foo</code> and you call the function using a different syntax, for example <code>foo()</code>.
+In Spry it's the other way around, we call functions simply by their name like <code>foo</code>, but if we want to refer to the function itself without calling it
+we use <code>$foo</code>.</p>
+</div>
+<p>There are different variants:</p>
+<ol>
+<li>Regular get word, for example <code>$x</code>. This looks first among local variables (in <code>locals</code>), then outwards lexically.</li>
+<li>Module qualified get word, for example <code>$Foo::x</code>. This looks directly in the Module named <code>Foo</code> and nowhere else. It's equivalent to <code>Foo at: 'x</code>.</li>
+<li>Self get word, for example <code>$@x</code>. This looks directly in <code>self</code> and nowhere else. It's equivalent to <code>$self::x</code> or <code>self at: 'x</code>.</li>
+<li>Outer get word, for example <code>$..x</code>. This is like a regular get word but does not first look in local variables.</li>
+<li>Arg get word, for example <code>:$x</code>. This pulls in the next argument for the lexically closest outer <code>func</code>, <strong>without first evaluating it</strong> in the calling scope, and stores it in <code>locals</code> as <code>x</code>. This makes it possible to write "macro like" functions.</li>
+</ol>
+<h3 id="eval-word">Eval word<a class="headerlink" href="#eval-word" title="Permanent link">&para;</a></h3>
+<p>An eval word works like a get word, but it <strong>also evaluates the result of the lookup</strong>. If the result of the lookup is for example a <code>func</code> then it is called. Just like get words we have the same 5 different variants, the difference is only the added evaluation.</p>
+<ol>
+<li>Regular eval word, for example <code>x</code>. This looks first in <code>locals</code>, then outwards lexically and then evaluates the result.</li>
+<li>Module eval word, for example <code>Foo::x</code>. This looks directly in the Module named <code>Foo</code> and nowhere else, and then evaluates the result. It's equivalent to <code>eval (Foo at: 'x)</code>.</li>
+<li>Self eval word, for example <code>@x</code>. This looks directly in <code>self</code> and nowhere else and then evaluates the result. It's equivalent to <code>self::x</code> or <code>self at: 'x</code>.</li>
+<li>Outer eval word, for example <code>..x</code>. This is like a regular eval word but does not first look in <code>locals</code>.</li>
+<li>Arg eval word, for example <code>:x</code>. This pulls in the next argument to the lexically closest outer <code>func</code>, but first evaluates it in the calling scope, and then stores the result in <code>locals</code> as <code>x</code>.</li>
+</ol>
+<h3 id="literal-word">Literal word<a class="headerlink" href="#literal-word" title="Permanent link">&para;</a></h3>
+<p>A literal word is a canonicalized (there is only ever one instance of every unique word) string and is written like <code>'foo</code>. This is very much like a Symbol in Smalltalk or Ruby. Obviously all described words above can be created in literal form just by prepending a <code>'</code>, like <code>'$foo</code>, <code>':foo</code> and so on. A literal word <strong>evaluates as itself</strong>.</p>
+<p>You use a literal word when you want to compose code or in situations where you would use a Symbol in Ruby/Smalltalk. Literal words can be reified using <code>reify</code>.</p>
+<h3 id="keywords">Keywords<a class="headerlink" href="#keywords" title="Permanent link">&para;</a></h3>
+<p>The message syntax of Smalltalk has proven itself over many years to be very readable and expressive. In Smalltalk a call (message) that takes arguments is written in "keyword style" like <code>'hello' copyFrom: 1 to: 2</code> which roughly in other languages would translate to <code>"hello".copy(1, 2)</code> or at best <code>"hello".copy(from=1, to=2)</code>. The advantage of the Smalltalk style is that it doesn't make you wonder what the arguments actually denote and in which order they should be given.</p>
+<p>The name of the method in this example in Smalltalk is <code>copyFrom:to:</code> so the colons are part of the identifier. Spry (unlike Rebol) allows for colons in words just like Smalltalk does and the Spry parser will thus automatically perform a rewrite of <code>"hello" copyFrom: 1 to: 2</code> into <code>"hello" copyFrom:to: 1 2</code> thus turning the call into a regular infix (first argument to the left) Spry function call, see <a href="#functions">Functions</a>.</p>
+<p>Both ways of writing are valid, although the latter would be... very ugly.</p>
+<p>But before explaining functions and function calls we first need to go through some simpler parts.</p>
+<h2 id="precedence">Precedence<a class="headerlink" href="#precedence" title="Permanent link">&para;</a></h2>
+<p>All programming languages have more or less complicated rules for evaluation precedence in expressions. Rebol and Smalltalk excel with very simple rules, while some other languages have dreadful intricate rules. Rebol and Smalltalk both have a base rule of evaluating from left to right and Spry has the very same rule.</p>
+<p>Then Smalltalk evaluate unary before binary, and binary before keyword messages. This usually removes a lot of parentheses and is quite natural in Smalltalk.
+Rebol has something similar where it evaluates operators before functions.</p>
+<p>But in Spry there is no such additional rules. The rule is simply <strong>from left to right</strong>. To do anything different you use parentheses!</p>
+<div class="codehilite"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>       <span class="c1"># Otherwise Spry assigns only 3 to x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>   <span class="c1"># Equals 20</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># Equals 14</span>
+</code></pre></div>
+
+<h2 id="booleans">Booleans<a class="headerlink" href="#booleans" title="Permanent link">&para;</a></h2>
+<p>There are no literals for booleans (!), but there are two  <a href="#singletons">singleton instances</a> of the VM's internal boolean node type (BoolVal) that are bound to the words <code>true</code> and <code>false</code> in the <a href="#Root">root</a> namespace. That's a mouthful explaining that yes, you can use <code>true</code> and <code>false</code> pretty much as usual. This design is borrowed from Smalltalk.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">x</span> <span class="ow">and</span> <span class="n">y</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="n">echo</span> <span class="s2">&quot;Both are not true&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="ow">or</span> <span class="n">y</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="n">echo</span> <span class="s2">&quot;But one is true&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="ow">not</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="n">echo</span> <span class="s2">&quot;Y is not true&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="k">else</span><span class="p">:</span> <span class="p">[</span><span class="n">echo</span> <span class="s2">&quot;Y is not true&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h2 id="nil-and-undef">Nil and Undef<a class="headerlink" href="#nil-and-undef" title="Permanent link">&para;</a></h2>
+<p>In the <a href="#singletons">same manner</a> as booleans we also have the word <code>nil</code> bound to the sole instance of the NilVal node type, and <code>undef</code> bound to the sole instance of UndefVal.</p>
+<p>Spry is experimenting with distinguishing between <code>nil</code> meaning <strong>nothing</strong> and <code>undef</code> meaning <strong>never assigned any value</strong>. For any word the value <code>nil</code> is thus a valid value. When a lookup doesn't find any valye for the key and fails you will get <code>undef</code>. If you get <code>nil</code> it means the lookup succeeded and the value in question is in fact <code>nil</code>. There is a primitive method called <code>?</code> that checks if a node is <code>undef</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">echo</span> <span class="n">x</span>     <span class="c1"># prints &quot;undef&quot;</span>
+<span class="n">echo</span> <span class="p">(</span><span class="n">x</span> <span class="err">?</span><span class="p">)</span> <span class="c1"># prints &quot;false&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">nil</span>
+<span class="n">echo</span> <span class="p">(</span><span class="n">x</span> <span class="err">?</span><span class="p">)</span> <span class="c1"># prints &quot;true&quot;</span>
+<span class="n">echo</span> <span class="n">x</span>     <span class="c1"># prints &quot;nil&quot;</span>
+</code></pre></div>
+
+<h2 id="composites">Composites<a class="headerlink" href="#composites" title="Permanent link">&para;</a></h2>
+<p>Literals and words are the "atoms" of Spry but in order to <strong>compose</strong> both data and code (Spry is homoiconic) we need some kind of "structures of many". We have three of these in core Spry - Block, Paren and Curly.</p>
+<h3 id="block">Block<a class="headerlink" href="#block" title="Permanent link">&para;</a></h3>
+<p>The Block is the work horse sequential structure in Spry but it is also the unit of code! Compared to Smalltalk one can almost say it does double duty as BlockClosure and OrderedCollection. A Block is formed using <code>[]</code>, for example <code>[1 + 2]</code>. There is no separator needed.</p>
+<p>When parsed this will create a Block and when evaluated <strong>a Block evaluates to itself</strong> - in other words, it does nothing.</p>
+<p>But if we have a Block we can do a lot of things with it explicitly - like <strong>evaluating it as code</strong> using the <code>do</code> function:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Evaluates to 3, try it in ispry</span>
+<span class="n">do</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+
+<p>A Block evaluates in its <strong>own local closure</strong> which means that the activation of the block has its own Map of local bindings. Assignments operate on this Map but it can also be explicitly accessed using the <code>locals</code> primitive. But in Spry we can also manipulate the Block as a sequence:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Evaluates to 7</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">foo</span> <span class="n">at</span><span class="p">:</span> <span class="mi">0</span> <span class="n">put</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">do</span> <span class="n">foo</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Yes, in Spry we use the same convention as in Nim regarding indexing - first element is at position 0.</p>
+</div>
+<h3 id="paren">Paren<a class="headerlink" href="#paren" title="Permanent link">&para;</a></h3>
+<p>In most programming languages parentheses are only used to control evaluation order and do not reify as anything concrete during execution. In Rebol and Spry however, <code>(1 + 2)</code> reify as a Paren when parsed. A Paren is a Composite internally just like a Block is, but when evaluated <strong>a Paren evaluates itself as code without creating a new closure and the result is the result of the last expression</strong>. It can be used pretty much as parentheses are used traditionally.</p>
+<h3 id="curly">Curly<a class="headerlink" href="#curly" title="Permanent link">&para;</a></h3>
+<p>The third Composite is the Curly which is written like <code>{a b c}</code>. It reifies as a Curly when parsed, which also is a Composite internally just like a Block. When a Curly is evaluated <strong>it evaluates itself like a Block does in its own closure, but the result is the locals Map of the closure</strong>. The net effect of that is that we use Curlys to create Maps:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">map</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="o">=</span> <span class="mi">50</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">}</span>
+</code></pre></div>
+
+<h3 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h3>
+<p>As mentioned, the Block is the sequential collection in Spry corresponding to OrderedCollection in Smalltalk. The Map corresponds similarly to Dictionary. All nodes in Spry can be used as keys in a Map. Word nodes come in 11 different types, as earlier described, but when used as keys only the actual word itself is used for hash and equality. This means that when used as keys, <code>$foo</code>, <code>foo</code> and <code>:foo</code> (for example) are all equal since only the actual word "foo" is used for hash and <code>==</code>. Literal words on the other hand are always different from each other, for example <code>'$foo</code> is different from <code>'foo</code>.</p>
+<h2 id="root">Root<a class="headerlink" href="#root" title="Permanent link">&para;</a></h2>
+<p>Spry is similar to Smalltalk in the sense that there is a special Map that holds all globals. In Smalltalk that Dictionary is called <code>Smalltalk</code>, in Spry we call it <code>root</code>.</p>
+<p>The root Map is created by the Spry interpreter and populated with words referring to primitive functions and known values like <code>true</code>, <code>false</code> etc. Lookups are done through the lexical scopes, which Blocks and Curlys create when evaluated, up to root.</p>
+<p>If a lookup still fails there is a special Block held in the word <code>modules</code> containing all <a href="#modules">Modules</a> that we want should participate in global lookups, in the order they are in that block. A <a href="#modules">Module</a> is just a Map with some extra meta information in it.</p>
+<p>The interpreter will iterate through the Modules and perform the lookup in each one until finding a hit, or giving up and returning <code>undef</code>. This means Modules will shadow each other depending on their position in the <code>modules</code> block. But you can always refer to names directly using Module getwords <code>Foo::x</code> or simple Map lookups like <code>Foo at: 'x</code>.</p>
+<p>This design is an experiment in "modelessness" since there are no import statements or other mechanisms to modify how lookups are made in a certain part of your source code. At the same time Modules can be loaded and used even if they do contain naming conflicts.</p>
+<h2 id="functions-and-methods">Functions and Methods<a class="headerlink" href="#functions-and-methods" title="Permanent link">&para;</a></h2>
+<p>This inevitably brings us to functions, or Funcs as they are called in Spry. Spry is a heavily functional language, in fact, there are <strong>no builtin keywords or operators</strong> at all in Spry - everything is a function, including such fundamental things as assignment <code>=</code>.</p>
+<p>Funcs can be written either as "primitives" in <a href="http://nim-lang.org">Nim</a> or in Spry of course. The Spry VM has a bunch of Funcs included internally, most of which are primitives but also some defined in Spry.</p>
+<p>Then there are <a href="#vm-modules">VM modules</a> that define more Funcs, again both primitives and Spry funcs. VM Modules are linked into the VM when you build the Spry VM, currently statically but they could be made to load dynamically as .so/.dlls too.</p>
+<p>Finally Spry also has <a href="#modules">Modules</a> that are pure Spry.</p>
+<h3 id="func">Func<a class="headerlink" href="#func" title="Permanent link">&para;</a></h3>
+<p>Functions are created from Blocks using the <code>func</code> function that takes a Block of code, performs a shallow copy of it to create a Func and returns it:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># We create a func from a block and assign it to foo</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span>
+<span class="c1"># Now evaluating foo will give 7</span>
+<span class="n">foo</span>
+</code></pre></div>
+
+<p>A Func <strong>evaluates the block when it's evaluated</strong>. This is in contrast to a Block which evaluates to itself. The return value of a Func is either the result of the last expression or you can return explicitly using the primitive return Func using the same character as in Smalltalk, <code>^</code>. Another important aspect of Funcs is that they are not polymorphic, or in other words, you can not overload them for different types of the arguments. However, several of the builtin core Funcs perform a bit of "type testing" internally so that you can indeed call them with different types of arguments and they handle them properly. For true polymorphic behaviors you should use (Polymethods](#Polymethods) in Spry.</p>
+<p>Funcs use prefix calling and they are called just like in Rebol:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Call foo with no arguments</span>
+<span class="n">foo</span>
+
+<span class="c1"># Call foo with one argument, an int</span>
+<span class="n">foo</span> <span class="mi">4</span>
+
+<span class="c1"># Call foo with two arguments</span>
+<span class="n">foo</span> <span class="mi">4</span> <span class="s2">&quot;hey&quot;</span>
+</code></pre></div>
+
+<p>Arguments to Funcs are "pulled in" using Arg words which are prefixed with <code>:</code>. Note that an arg word is an <strong>operation</strong>, not a declaration, so they can appear anywhere in the Func.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># This func takes one argument and adds 4 to it</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span>
+<span class="c1"># Prints 9 on stdout</span>
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">5</span>
+</code></pre></div>
+
+<p>The Func <code>echo</code> is included in the VMModule <code>spryio</code> which in turn is included in the standard spry and ispry VMs. For embedded use one can however build a Spry VM that does not include it. <code>echo</code> is a prefix Func that takes one argument that it will turn into a string before writing it to stdout using <a href="http://nim-lang.org/docs/system.html#echo,varargs[typed,]">Nim's echo proc</a>.</p>
+<p>The arg word <code>:x</code> will take the next argument AST node (the <code>5</code> literal) to the <code>foo</code> Func, evaluate it at the call site (literals evaluate to themselves) and take the resulting node and store it in the local variable <code>x</code> in the Func closure, and the result of the arg word will be that node. Since the result is the value it means you can actually use <code>:x</code> in an expression just like we do above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The fact that arg words are operations also means the arity of a Func is not static,
+it could in theory pull in a different number of arguments - although that would
+be very confusing.</p>
+</div>
+<p>You could also write the Func in "Smalltalk style" that looks like declarations:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># This func takes one argument and adds 4 to it</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span>
+<span class="c1"># Prints 9 on stdout</span>
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">5</span>
+</code></pre></div>
+
+<p>Currently that will be slightly slower since we first evaluate <code>:x</code> and then <code>x</code> but it may sometimes make the code easier to read.</p>
+<p>Arg words can also be "get arg words" which means that we can pull in the argument AST node <strong>without first evaluating it at the call site</strong>. Here is an example that shows the difference:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="err">$</span><span class="n">x</span> <span class="n">echo</span> <span class="err">$</span><span class="n">x</span><span class="p">]</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="n">echo</span> <span class="err">$</span><span class="n">x</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;abc&quot;</span>
+<span class="n">bar</span> <span class="n">x</span> <span class="c1"># prints &quot;abc&quot;</span>
+<span class="n">foo</span> <span class="n">x</span> <span class="c1"># prints &quot;x&quot;</span>
+<span class="n">bar</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># prints &quot;7&quot;</span>
+<span class="n">foo</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># prints &quot;(3 + 4)&quot;</span>
+</code></pre></div>
+
+<p>The reason we use <code>echo $x</code> is to prevent <code>x</code> from being evaluated inside the func.</p>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
+<p>Methods are just like Funcs but they always take at least one argument, from the left. This mandatory "receiver" is accessible using the primitive func <code>self</code>, so no need to use an arg word to pull it in. This means Methods "feel" like OO messages, but they are still not polymorphic based on the receiver, again you should use <a href="#Polymethod">Polymethods</a> for that.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Call method foo on an int</span>
+<span class="mi">4</span> <span class="n">foo</span>
+
+<span class="c1"># Call method foo on a string, with one more argument</span>
+<span class="s2">&quot;hey&quot;</span> <span class="n">foo</span> <span class="mi">7</span>
+
+<span class="c1"># Call method foo with three arguments</span>
+<span class="mi">4</span> <span class="n">foo</span> <span class="s2">&quot;hey&quot;</span> <span class="s2">&quot;there&quot;</span>
+</code></pre></div>
+
+<p>Methods are created using <code>method</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Create a method that adds 5 to self</span>
+<span class="n">plusfive</span> <span class="o">=</span> <span class="n">method</span> <span class="p">[</span><span class="bp">self</span> <span class="o">+</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">echo</span> <span class="p">(</span><span class="mi">3</span> <span class="n">plusfive</span><span class="p">)</span> <span class="c1"># prints &quot;8&quot;</span>
+</code></pre></div>
+
+<p>Both methods and funcs can use keyword naming and calling style:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Create a function and assign it to a keyword</span>
+<span class="n">add</span><span class="p">:</span><span class="n">to</span><span class="p">:</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="o">+</span> <span class="p">:</span><span class="n">y</span><span class="p">]</span>
+<span class="n">echo</span> <span class="p">(</span><span class="n">add</span><span class="p">:</span> <span class="mi">5</span> <span class="n">to</span><span class="p">:</span> <span class="mi">6</span><span class="p">)</span>   <span class="c1"># prints &quot;11&quot;</span>
+
+<span class="c1"># And a method in the same way</span>
+<span class="n">add</span><span class="p">:</span><span class="ow">and</span><span class="p">:</span> <span class="o">=</span> <span class="n">method</span> <span class="p">[</span><span class="bp">self</span> <span class="o">+</span> <span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="p">:</span><span class="n">y</span><span class="p">]</span>
+<span class="n">echo</span> <span class="p">(</span><span class="mi">3</span> <span class="n">add</span><span class="p">:</span> <span class="mi">5</span> <span class="ow">and</span><span class="p">:</span> <span class="mi">6</span><span class="p">)</span> <span class="c1"># prints &quot;14&quot;</span>
+
+<span class="c1"># Can also be called like this</span>
+<span class="n">echo</span> <span class="p">(</span><span class="n">add</span><span class="p">:</span><span class="n">to</span><span class="p">:</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">)</span>    <span class="c1"># prints &quot;11&quot;</span>
+<span class="n">echo</span> <span class="p">(</span><span class="mi">3</span> <span class="n">add</span><span class="p">:</span><span class="ow">and</span><span class="p">:</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">)</span> <span class="c1"># prints &quot;14&quot;</span>
+</code></pre></div>
+
+<h2 id="scoping">Scoping<a class="headerlink" href="#scoping" title="Permanent link">&para;</a></h2>
+<p>Spry code is organized in nested Blocks. Each Block is a scope, a closure in fact. And each closure has a Map containing its local bindings, which you can reach explicitly using <code>locals</code>. The top level's local bindings are in fact <code>root</code>.</p>
+<p>Words are what you use to refer to things in Spry so if you use a regular eval word like <code>foo</code>, that means <strong>lookup the key "foo" first in the locals and then outwards until reaching the global scope. Then evaluate whatever value is returned from the lookup</strong>. In Spry we don't declare anything, not even local variables like you do in Smalltalk, instead we have 5 different variants of words to reach our bindings, here are all 5 described once more:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Lookup in locals and outwards to root and all Modules listed in modules, undef if not found</span>
+<span class="n">foo</span>
+
+<span class="c1"># Lookup outside this closure and outwards to root and all Modules listed in modules, undef if not found</span>
+<span class="o">..</span><span class="n">foo</span>
+
+<span class="c1"># Lookup in the Map called Bar, undef if not found</span>
+<span class="n">Bar</span><span class="p">::</span><span class="n">foo</span>
+
+<span class="c1"># Lookup in self which is the nearest receiver Map</span>
+<span class="nd">@foo</span>
+
+<span class="c1"># Pull in the next argument to this Block invocation</span>
+<span class="p">:</span><span class="n">foo</span>
+</code></pre></div>
+
+<p>The first 4 variants can also be used as left side in an assignment with these meanings:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Bind in locals, regardless of any outer reachable foo&#39;s</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Lookup outside this closure and outwards to root and all Modules listed in modules.</span>
+<span class="c1"># If found assign to that foo, otherwise bind in nearest outer closure.</span>
+<span class="o">..</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Bind in the Map called Bar</span>
+<span class="n">Bar</span><span class="p">::</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Bind in self which is the nearest receiver Map</span>
+<span class="nd">@foo</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre></div>
+
+<p>The most uncommon effect of these rules is that you often need to use <code>..foo</code> as left hand side in assignments being done inside control structure blocks. This is because all blocks are closures and we don't declare locals in Spry so Spry has no way of knowing that you want to assign to the outer <code>foo</code> and not a local <code>foo</code>. This means that the following code has to be rewritten to work as intended:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[</span> <span class="p">:</span><span class="n">a</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+  <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">]</span> <span class="c1"># This needs to say &quot;..x = 20&quot;</span>
+  <span class="o">^</span><span class="n">x</span><span class="p">]</span>
+
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">5</span>  <span class="c1"># prints 10</span>
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">12</span> <span class="c1"># still prints 10!</span>
+</code></pre></div>
+
+<p>The reason is that <code>x = 20</code> sets <code>x</code> in the local then-block, not in the outer func block. Rewriting with <code>..x</code> solves it, but we can perhaps do this instead:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[</span> <span class="p">:</span><span class="n">a</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="k">else</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+  <span class="o">^</span><span class="n">x</span><span class="p">]</span>
+
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">5</span>  <span class="c1"># prints 10</span>
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">12</span> <span class="c1"># prints 20</span>
+</code></pre></div>
+
+<p>Or even shorter of course:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">foo</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="n">then</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="k">else</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]]</span>
+
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">5</span>  <span class="c1"># prints 10</span>
+<span class="n">echo</span> <span class="n">foo</span> <span class="mi">12</span> <span class="c1"># prints 20</span>
+</code></pre></div>
+
+<p>For the moment this is a "language wart" - in other words - something I would like to fix but not sure exactly how yet. :)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The rules for the left side in assignments are under evaluation. A variant could be that we distinguish between func/method/curly scopes and other blocks.</p>
+</div>
+<h2 id="standard-library">Standard Library<a class="headerlink" href="#standard-library" title="Permanent link">&para;</a></h2>
+<p>The Spry VM includes a very minimal "standard library" in the form of primitive Methods and Funcs, a few Spry only Methods and Funcs and a few singleton nodes. The VM creates the global <code>root</code> Map and populates it with words.</p>
+<p>The regular Spry VM <code>spry</code> and the REPL <code>ispry</code> also loads several VM Modules that adds more words to <code>root</code>. Finally, the file <code>spry.sy</code> is loaded with additional Spry library code that are not primitives.</p>
+<h3 id="singletons">Singletons<a class="headerlink" href="#singletons" title="Permanent link">&para;</a></h3>
+<p>The following singleton nodes are created and bound to these words by the VM.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code></td>
+<td>Reference to the singleton for falsehood</td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td>Reference to the singleton for truth</td>
+</tr>
+<tr>
+<td><code>undef</code></td>
+<td>Reference to the singleton for missing value</td>
+</tr>
+<tr>
+<td><code>nil</code></td>
+<td>Reference to the singleton for value meaning no value</td>
+</tr>
+<tr>
+<td><code>modules</code></td>
+<td>Reference to a Block of Maps for lookups</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reflection">Reflection<a class="headerlink" href="#reflection" title="Permanent link">&para;</a></h3>
+<p>The following Funcs and Methods are available for reflection purposes.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>root</code></td>
+<td>Func</td>
+<td>Returns the Map of global bindings</td>
+</tr>
+<tr>
+<td><code>activation</code></td>
+<td>Func</td>
+<td>Returns the current Activation</td>
+</tr>
+<tr>
+<td><code>locals</code></td>
+<td>Func</td>
+<td>Returns the Map of local bindings</td>
+</tr>
+<tr>
+<td><code>self</code></td>
+<td>Func</td>
+<td>Returns the receiver in a Method, undef in a Func</td>
+</tr>
+<tr>
+<td><code>node</code></td>
+<td>Func</td>
+<td>Returns the receiver in a Method, unevaluated</td>
+</tr>
+<tr>
+<td><code>;</code></td>
+<td>Func</td>
+<td>Returns the previous receiver, enables Smalltalk style cascades</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Method</td>
+<td>Returns a literal word representing the nodetype, see below.</td>
+</tr>
+</tbody>
+</table>
+<p>The method <code>type</code> returns a literal word representing the type of the receiver node: <code>'int</code>, <code>'float</code>, <code>'string</code>,<code>'boolean</code>, <code>'undefined</code>, <code>'novalue</code>, <code>'block</code>, <code>'paren</code>, <code>'curly</code>, <code>'map</code>, <code>'binding</code>, <code>'evalword</code>, <code>'evalmoduleword</code>, <code>'evalselfword</code>, <code>'evalouterword</code>, <code>'evalargword</code>, <code>'getword</code>, <code>'getmoduleword</code>, <code>'getselfword</code>, <code>'getouterword</code>, <code>'getargword</code>, <code>'litword</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Activation node does not yet expose any functionality, but it will eventually be used to open up access to the execution stack etc similar to <code>thisContext</code> in Smalltalk. The reason for <code>root</code> to not be a reference to the singleton is to avoid a recursive global Map.</p>
+</div>
+<h3 id="creating-things">Creating things<a class="headerlink" href="#creating-things" title="Permanent link">&para;</a></h3>
+<p>Spry is not a class based language. Things are created either using literal syntax (created at parse time), through specific evaluation mechanisms (maps are created through evaluating curlys) or through cloning already existing things:</p>
+<div class="codehilite"><pre><span></span><code># Literal syntax, created at parse time
+x = &quot;abc&quot;
+y = 12.0
+z = 99
+
+# Composites, created at parse time
+# $ prevents evaluation so that we can hold the paren/curly itself
+paren = $ (1 + 3)
+curly = $ {1 2 3}
+# No need for $ since blocks evaluate to themselves
+block = [1 2 3]
+
+# Create a map through evaluating a curly
+# The curly is created at parse time, but the map
+# is created when we evaluate the curly
+map = {x = 12}
+
+# Cloning at evaluation time, note need for parens
+x = (&quot;abc&quot; clone)
+y = ([1 2 3] clone)
+z = ({x = 12} clone)
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clone</code></td>
+<td>Method</td>
+<td>Performs a copy of strings, does nothing for floats and ints and a performs a shallow copy of blocks, parens, curlys and maps.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tags">Tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h3>
+<p>All nodes of all types in Spry can have a block of tags. Tags are currently limited to being literal words. It's used mainly for Maps and Polymethods which forms the basis of OO in Spry.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x tag: aWord</code></td>
+<td>Method</td>
+<td>Add a tag on a node x. If aWord is not a literal word, it will be converted to one</td>
+</tr>
+<tr>
+<td><code>x tag? aWord</code></td>
+<td>Method</td>
+<td>Check if a node x has the given tag. If aWord is not a literal word, it will be converted to one</td>
+</tr>
+<tr>
+<td><code>x tags</code></td>
+<td>Method</td>
+<td>Returns the Block of tags on node x</td>
+</tr>
+<tr>
+<td><code>x tags: aBlock</code></td>
+<td>Method</td>
+<td>Set the Block of tags on node x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link">&para;</a></h3>
+<p>In Spry we don't have Rebol style "set words", instead we have a word <code>=</code> that is bound to a primitive Method that performs assignment. This method uses the left hand side unevaluated, which means it works for most normal cases. For more advanced cases where you want to compute the left hand side you can use <code>set:</code> instead. Similarly <code>?</code> has a counterpart in <code>get?</code>.</p>
+<p>Finally there is no unset word, but you can instead assign to <code>undef</code> which will remove the binding.</p>
+<p>Currently there is a <a href="#Language-Warts">language wart</a> that usually forces assignments to be written with parentheses. Spry has no statement separators and does not consider line breaks. You can write a Spry program in one single long line. This means Spry has no simple of knowing when the expression ends. Due to this the current rule is that assignment <strong>only consumes a single node from the right</strong>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># You need a paren here because otherwise</span>
+<span class="c1"># Spry finds &quot;3&quot; and evaluates it (to 3 obviously)</span>
+<span class="c1"># and then assigns that to x.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># This works because readFile is a func and when</span>
+<span class="c1"># evaluated it will pull in the argument filename </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">readFile</span> <span class="s2">&quot;afile.txt&quot;</span>
+</code></pre></div>
+
+<p>One idea to improve this without introducing separators or making line breaks meaningful (I don't want to do any of those two) is to make evaluation more "eager". Using "look ahead" Spry could check if the word coming after "3" is in fact a method, and then it would continue evaluating it.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x = aNode</code></td>
+<td>Method</td>
+<td>Assigns the right hand node to the left hand word x. Left hand side is not evaluated. It can be a literal word or a regular word for local binding. An outer word for binding to an outer closure, or a module word for binding in a Map or Module.</td>
+</tr>
+<tr>
+<td><code>x ?</code></td>
+<td>Method</td>
+<td>Checks if x is bound to something. Left hand side is not evaluated. It can be any kind of word, including a literal word.</td>
+</tr>
+<tr>
+<td><code>x set: aNode</code></td>
+<td>Method</td>
+<td>Assigns the right hand node to the left hand literal word. Left hand side is evaluated and should evaluate to a word which is used through the same rules as <code>=</code>.</td>
+</tr>
+<tr>
+<td><code>x set?</code></td>
+<td>Method</td>
+<td>Checks if x is bound to something. Left hand side is evaluated and should evaluate to a word.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="arithmetic">Arithmetic<a class="headerlink" href="#arithmetic" title="Permanent link">&para;</a></h3>
+<p>Spry has int and float as numeric nodes and will automatically convert from int to float if they are mixed.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></td>
+<td>Method</td>
+<td>Normal arithmetic methods, ints are converted to floats if needed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comparisons">Comparisons<a class="headerlink" href="#comparisons" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td>
+<td>Method</td>
+<td>Defined so far for int, float and strings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="equality">Equality<a class="headerlink" href="#equality" title="Permanent link">&para;</a></h3>
+<p>In Spry <code>=</code> is used for assignment so we use <code>==</code> (and <code>!=</code>) for testing equality and <code>===</code> for testing identity.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>Method</td>
+<td>Check equality</td>
+</tr>
+<tr>
+<td><code>===</code></td>
+<td>Method</td>
+<td>Check identity</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Method</td>
+<td>Checks for inequality</td>
+</tr>
+<tr>
+<td><code>!===</code></td>
+<td>Method</td>
+<td>Checks for non identity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="booleans_1">Booleans<a class="headerlink" href="#booleans_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>not</code></td>
+<td>Method</td>
+<td>Negates a boolean</td>
+</tr>
+<tr>
+<td><code>and</code></td>
+<td>Method</td>
+<td>If left hand side expression evaluates to true, then right hand side is also evaluated. True if both are true, otherwise false</td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td>Method</td>
+<td>If left hand side expression evaluates to false, then right hand side is also evaluated. True if either is true, otherwise false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="concatenation">Concatenation<a class="headerlink" href="#concatenation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>,</code></td>
+<td>Method</td>
+<td>Concatenates strings, blocks, parens and curlys</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conversions">Conversions<a class="headerlink" href="#conversions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>print</code></td>
+<td>Method</td>
+<td>Returns the node in the user friendly string format for presentation (like Rebol's "form")</td>
+</tr>
+<tr>
+<td><code>parse</code></td>
+<td>Func</td>
+<td>Parse a string of Spry into nodes, comments are kept</td>
+</tr>
+<tr>
+<td><code>serialize</code></td>
+<td>Method</td>
+<td>Returns the node as a string in source form excluding comments</td>
+</tr>
+<tr>
+<td><code>commented</code></td>
+<td>Method</td>
+<td>Returns the node as a string in source form including comments</td>
+</tr>
+<tr>
+<td><code>asFloat</code></td>
+<td>Method</td>
+<td>Converts an int to float</td>
+</tr>
+<tr>
+<td><code>asInt</code></td>
+<td>Method</td>
+<td>Converts a float to int</td>
+</tr>
+</tbody>
+</table>
+<h3 id="composites_1">Composites<a class="headerlink" href="#composites_1" title="Permanent link">&para;</a></h3>
+<p>These methods operate mainly on the sequential composites - blocks, parens and curlys. Some also work for strings. And some also work for maps.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>size</code></td>
+<td>Method</td>
+<td>Returns number of elements, works for string, blocks, parens, curlys and maps.</td>
+</tr>
+<tr>
+<td><code>at:</code></td>
+<td>Method</td>
+<td>Get element at a key, works for blocks, parens, curlys and maps. Returns undef if not found.</td>
+</tr>
+<tr>
+<td><code>at:put:</code></td>
+<td>Method</td>
+<td>Set element at a key to a value, works for blocks, parens, curlys and maps. Using <code>undef</code> as value means removing the binding for Maps.</td>
+</tr>
+<tr>
+<td><code>get:</code></td>
+<td>Method</td>
+<td>Get element at unevaluated argument. Works for blocks, parens, curlys and maps. Returns undef if not found.</td>
+</tr>
+<tr>
+<td><code>set:to:</code></td>
+<td>Method</td>
+<td>Set element at unevaluated argument. Works for blocks, parens, curlys and maps. Using <code>undef</code> as value means removing the binding for Maps.</td>
+</tr>
+<tr>
+<td><code>add:</code></td>
+<td>Method</td>
+<td>Add element to sequential composite. Works for blocks, parens and curlys.</td>
+</tr>
+<tr>
+<td><code>removeLast</code></td>
+<td>Method</td>
+<td>Remove last element of sequential composite. Works for blocks, parens and curlys.</td>
+</tr>
+<tr>
+<td><code>copyFrom:to:</code></td>
+<td>Method</td>
+<td>Copy a sub range to form a new composite of the same type. Works for blocks, parens and curlys.</td>
+</tr>
+<tr>
+<td><code>contains:</code></td>
+<td>Method</td>
+<td>Test if the composite contains any element equal to the given argument. Works for blocks, parens, curlys and maps.</td>
+</tr>
+<tr>
+<td><code>first</code></td>
+<td>Method</td>
+<td>Return element at position 0.</td>
+</tr>
+<tr>
+<td><code>second</code></td>
+<td>Method</td>
+<td>Return element at position 1.</td>
+</tr>
+<tr>
+<td><code>third</code></td>
+<td>Method</td>
+<td>Return element at position 2.</td>
+</tr>
+<tr>
+<td><code>fourth</code></td>
+<td>Method</td>
+<td>Return element at position 3.</td>
+</tr>
+<tr>
+<td><code>fifth</code></td>
+<td>Method</td>
+<td>Return element at position 4.</td>
+</tr>
+<tr>
+<td><code>last</code></td>
+<td>Method</td>
+<td>Return last element.</td>
+</tr>
+<tr>
+<td><code>do:</code></td>
+<td>Method</td>
+<td>Iterate over block, paren or curly and evaluate argument block for each element, Smalltalk style.</td>
+</tr>
+<tr>
+<td><code>sum</code></td>
+<td>Method</td>
+<td>Sums all elements of a block, paren or curly. Can contain a mix of ints and floats. If all are int result will be an int.</td>
+</tr>
+</tbody>
+</table>
+<p>For Maps you can also use <code>::</code>-syntax to get and together with <code>=</code> to set. Using <code>undef</code> as value means <strong>removing the binding</strong> for Maps.</p>
+<h3 id="blocks">Blocks<a class="headerlink" href="#blocks" title="Permanent link">&para;</a></h3>
+<p>Blocks actually double as <strong>positionable streams</strong> too, with an internal position just like in Rebol. This means we can easily step through a Block using its internal position. The following methods form the base of this stream protocol.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reset</code></td>
+<td>Method</td>
+<td>Set position to 0</td>
+</tr>
+<tr>
+<td><code>pos</code></td>
+<td>Method</td>
+<td>Get current position, first position is 0</td>
+</tr>
+<tr>
+<td><code>pos:</code></td>
+<td>Method</td>
+<td>Set current position</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td>Method</td>
+<td>Get the element at the current position without moving forward</td>
+</tr>
+<tr>
+<td><code>write:</code></td>
+<td>Method</td>
+<td>Set the element at the current position without moving forward</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td>Method</td>
+<td>Get the element at the current position and increase the position</td>
+</tr>
+<tr>
+<td><code>prev</code></td>
+<td>Method</td>
+<td>Get the element at the current position and decrease the position</td>
+</tr>
+<tr>
+<td><code>end?</code></td>
+<td>Method</td>
+<td>Return true if position is &gt;= size, which indicates we have reached the end</td>
+</tr>
+</tbody>
+</table>
+<h3 id="funcs-and-methods">Funcs and Methods<a class="headerlink" href="#funcs-and-methods" title="Permanent link">&para;</a></h3>
+<p>The core unit of behavior in Spry is funcs and methods. As described above, both work essentially the same, but methods take the first argument (the "receiver") from the left and make it accessible using <code>self</code>, you don't use an arg word to pull it in. You use <code>^</code> to do an early return, just like in Smalltalk.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>func</code></td>
+<td>Func</td>
+<td>Creates a func which is a prefix function taking all arguments on the right side</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Func</td>
+<td>Creates a method which is an infix function taking the first argument, the receiver, on the left side</td>
+</tr>
+</tbody>
+</table>
+<h3 id="evaluation">Evaluation<a class="headerlink" href="#evaluation" title="Permanent link">&para;</a></h3>
+<p>The following funcs performs explicit evaluation in various ways.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>do</code></td>
+<td>Func</td>
+<td>Takes one argument, a block. Evaluates the block.</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>Func</td>
+<td>Takes one argument but does not evaluate it, returns it unevaluated. Can be used to prevent evaluation of nodes.</td>
+</tr>
+<tr>
+<td><code>eva</code></td>
+<td>Func</td>
+<td>Takes one argument, evaluates it and returns the result.</td>
+</tr>
+<tr>
+<td><code>eval</code></td>
+<td>Func</td>
+<td>Takes one argument, evaluates it and then also evaluates the result.</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>Func</td>
+<td>Takes one argument, evaluates it and performs an early return.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="words_1">Words<a class="headerlink" href="#words_1" title="Permanent link">&para;</a></h3>
+<p>Spry has 11 different kinds of Words. The following funcs can create and convert words in different ways.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reify</code></td>
+<td>Func</td>
+<td>Makes a word from a literal word</td>
+</tr>
+<tr>
+<td><code>litify</code></td>
+<td>Func</td>
+<td>Makes a literal word from a word</td>
+</tr>
+<tr>
+<td><code>quote</code></td>
+<td>Func</td>
+<td>Makes a literal word from an unevaluated word</td>
+</tr>
+<tr>
+<td><code>litword</code></td>
+<td>Func</td>
+<td>Makes a literal word from a string</td>
+</tr>
+<tr>
+<td><code>word</code></td>
+<td>Func</td>
+<td>Makes a word from a string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conditionals">Conditionals<a class="headerlink" href="#conditionals" title="Permanent link">&para;</a></h3>
+<p>Spry uses Smalltalk style keyword based conditionals but I decided to rename the Smalltalk variants <code>ifTrue:</code>, <code>ifFalse:</code>, <code>ifTrue:ifFalse:</code>, <code>ifFalse:ifTrue:</code> to the slightly shorter <code>then:</code>, <code>else:</code>, <code>then:else:</code>, <code>else:then:</code>. </p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>then:</code></td>
+<td>Method</td>
+<td>If receiver is true then evaluate the given block</td>
+</tr>
+<tr>
+<td><code>else:</code></td>
+<td>Method</td>
+<td>If receiver is false then evaluate the given block</td>
+</tr>
+<tr>
+<td><code>then:else:</code></td>
+<td>Method</td>
+<td>If receiver is true then evaluate the first block, otherwise the second</td>
+</tr>
+<tr>
+<td><code>else:then:</code></td>
+<td>Method</td>
+<td>If receiver is false then evaluate the first block, otherwise the second</td>
+</tr>
+</tbody>
+</table>
+<p>Other variants can easily be implemented in Spry too, like for example implementing <code>ifTrue:</code>, using <code>then:</code>. Pointless of course:</p>
+<div class="codehilite"><pre><span></span><code>ifTrue: = method [:blk self then: [^do blk] nil]
+3 &lt; 4 ifTrue: [echo &quot;Works&quot;] 
+</code></pre></div>
+
+<p>Or you could of course just make an alias, assigning <code>ifTrue:</code> to the same primitive as <code>then:</code> is bound to.</p>
+<div class="codehilite"><pre><span></span><code>ifTrue: = $then:
+3 &lt; 4 ifTrue: [echo &quot;Works&quot;]
+</code></pre></div>
+
+<h3 id="loops">Loops<a class="headerlink" href="#loops" title="Permanent link">&para;</a></h3>
+<p>The following loop words are also designed like in Smalltalk. </p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timesRepeat:</code></td>
+<td>Method</td>
+<td>Smalltalk style loop. The receiver is an int and the argument is a block to evaluate that number of times</td>
+</tr>
+<tr>
+<td><code>to:do:</code></td>
+<td>Method</td>
+<td>Smalltalk style for-loop, although currently limited to a step by +1</td>
+</tr>
+<tr>
+<td><code>whileTrue:</code></td>
+<td>Method</td>
+<td>Smalltalk style conditional loop</td>
+</tr>
+<tr>
+<td><code>whileFalse:</code></td>
+<td>Method</td>
+<td>Smalltalk style conditional loop</td>
+</tr>
+</tbody>
+</table>
+<h3 id="misc">Misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quit</code></td>
+<td>Func</td>
+<td>Quits the interpreter. Takes one argument, the numeric exit code to return to the OS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="polymethod">Polymethod<a class="headerlink" href="#polymethod" title="Permanent link">&para;</a></h3>
+<h3 id="spry-library">Spry library<a class="headerlink" href="#spry-library" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>error</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>assert</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>obect</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>module</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sprydo:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>detect:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>select:</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h2>
+<p>Modules in Spry are simply Maps with an additional entry under the key <code>_meta</code> with a Map containing the meta information about the Module. Here is an example:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="n">_meta</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Foo</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Testing module closure&quot;</span>
+  <span class="p">}</span>
+
+  <span class="c1"># Local baz. The Map itself is the lexical parent of the funcs we create below.</span>
+  <span class="c1"># That means that lookups inside the funcs will continue outwards through the Map. </span>
+  <span class="n">baz</span> <span class="o">=</span> <span class="mi">1</span>
+
+  <span class="c1"># Here we rely on a baz in this module, or else in the global scope</span>
+  <span class="n">bar</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="o">+</span> <span class="n">baz</span><span class="p">]</span>
+
+  <span class="c1"># Here we make sure to use the module baz, avoiding the local one inside the func</span>
+  <span class="n">bar2</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[</span> <span class="n">baz</span> <span class="o">=</span> <span class="mi">99</span> <span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="o">..</span><span class="n">baz</span><span class="p">]</span>
+
+  <span class="c1"># Here we use Foo::baz, which will resolve to 1 if this module is indeed loaded as Foo</span>
+  <span class="n">bar3</span> <span class="o">=</span> <span class="n">func</span> <span class="p">[:</span><span class="n">x</span> <span class="o">+</span> <span class="n">Foo</span><span class="p">::</span><span class="n">baz</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>As we can see the above is just Spry syntax for a <a href="#map">Map</a> and the Map contains 3 funcs and one "variable" called <code>baz</code>. If we put this in <code>foo.sy</code> - the filename is not important and can be anything - we can then load this module into Spry using <code>loadFile: "foo.sy"</code>. The default behavior is to load and bind the module to the name in <code>_meta</code> as a global in <code>root</code>. Then we can manipulate it and reach it's members using <code>Foo::xxx</code> syntax:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Load the module as the name it has in the neta information</span>
+<span class="n">loadFile</span><span class="p">:</span> <span class="s2">&quot;foo.sy&quot;</span>
+
+<span class="c1"># We can now access stuff in Foo, should print 1</span>
+<span class="n">echo</span> <span class="n">Foo</span><span class="p">::</span><span class="n">baz</span>
+
+<span class="c1"># Run the bar func with 1 as argument, should print 2</span>
+<span class="n">echo</span> <span class="n">Foo</span><span class="p">::</span><span class="n">bar</span> <span class="mi">1</span>
+
+<span class="c1"># Set a global value for baz</span>
+<span class="n">baz</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># This should return 2</span>
+<span class="n">echo</span> <span class="n">Foo</span><span class="p">::</span><span class="n">bar2</span> <span class="mi">1</span>
+
+<span class="c1"># And this should return 2</span>
+<span class="n">echo</span> <span class="n">Foo</span><span class="p">::</span><span class="n">bar3</span> <span class="mi">1</span>
+
+<span class="c1"># If we throw away Foo and load it as Zoo</span>
+<span class="n">Foo</span> <span class="o">=</span> <span class="n">undef</span>
+<span class="n">loadFile</span><span class="p">:</span> <span class="s2">&quot;foo.sy&quot;</span> <span class="k">as</span><span class="p">:</span> <span class="s1">&#39;Zoo</span>
+
+<span class="c1"># Then all works the same, should print 2</span>
+<span class="n">echo</span> <span class="n">Zoo</span><span class="p">::</span><span class="n">bar</span> <span class="mi">1</span>
+
+<span class="c1"># Create a different Foo, so that bar3 finds something</span>
+<span class="n">Foo</span> <span class="o">=</span> <span class="p">{</span><span class="n">baz</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+
+<span class="c1"># Should print 9</span>
+<span class="n">echo</span> <span class="n">Zoo</span><span class="p">::</span><span class="n">bar3</span> <span class="mi">1</span>
+</code></pre></div>
+
+<p>Finally, we can also add modules to the special block called <code>modules</code> which is used by the lookup machinery in Spry. Lookups go outwards lexically all the way up to <code>root</code> and if it fails Spry then looks in each module listed in <code>modules</code> until giving up and returning <code>undef</code>.</p>
+<h2 id="vm-modules">VM Modules<a class="headerlink" href="#vm-modules" title="Permanent link">&para;</a></h2>
+<p>Core Spry comes with a bunch of assorted VM modules. A VM module is a separate Nim package that has a Nim proc that "adds it" to a Spry Interpreter instance. The idea is that when you build a Spry VM you pick which VM modules you want to include and then call them one by one. The standard Spry VM has a section that looks something like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">spryextend</span><span class="p">,</span><span class="w"> </span><span class="n">sprymath</span><span class="p">,</span><span class="w"> </span><span class="n">spryos</span><span class="p">,</span><span class="w"> </span><span class="n">spryio</span><span class="p">,</span><span class="w"> </span><span class="n">sprythread</span><span class="p">,</span>
+<span class="w"> </span><span class="n">spryoo</span><span class="p">,</span><span class="w"> </span><span class="n">sprydebug</span><span class="p">,</span><span class="w"> </span><span class="n">sprycompress</span><span class="p">,</span><span class="w"> </span><span class="n">sprystring</span><span class="p">,</span><span class="w"> </span><span class="n">sprymodules</span><span class="p">,</span>
+<span class="w"> </span><span class="n">spryreflect</span><span class="p">,</span><span class="w"> </span><span class="n">spryui</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">spry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newInterpreter</span><span class="p">()</span>
+
+<span class="c"># Add extra modules</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addExtend</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addMath</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addOS</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addIO</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addThread</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addOO</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addDebug</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addCompress</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addString</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addModules</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addReflect</span><span class="p">()</span>
+<span class="n">spry</span><span class="p">.</span><span class="n">addUI</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Here we see that the regular VM imports a bunch of VM modules at the top, and then calls <code>addXXX</code> for each one. Let's look closer at the LZ4 compression VM module called <code>sprycompress.nim</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">lz4</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">spryvm</span>
+
+<span class="c"># Spry compression</span>
+<span class="k">proc</span><span class="w"> </span><span class="nf">addCompress</span><span class="o">*</span><span class="p">(</span><span class="n">spry</span><span class="p">:</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">  </span><span class="c"># Compression of string</span>
+<span class="w">  </span><span class="n">nimFunc</span><span class="p">(</span><span class="s">&quot;compress&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">newValue</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">StringVal</span><span class="p">(</span><span class="n">evalArg</span><span class="p">(</span><span class="n">spry</span><span class="p">)).</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">  </span><span class="n">nimFunc</span><span class="p">(</span><span class="s">&quot;uncompress&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">newValue</span><span class="p">(</span><span class="n">uncompress</span><span class="p">(</span><span class="n">StringVal</span><span class="p">(</span><span class="n">evalArg</span><span class="p">(</span><span class="n">spry</span><span class="p">)).</span><span class="n">value</span><span class="p">))</span>
+</code></pre></div>
+
+<p>The name <code>addXXX</code> is just convention, but it must take an argument spry of type <code>aInterpreter</code>. Then in that proc we can do several things, but perhaps most importantly we can add primitives to Spry. We typically do that using the Nim templates <code>nimFunc</code> and <code>nimMeth</code>. A primitive is given a name and the code has access to the Interpreter via <code>spry</code>. Using Nim procs like <code>evalArg(spry)</code> we can pull in the next argument (<code>evalArgInfix(spry)</code> pulls in the receiver from the left) and at the end the primitive must return a <code>Node</code>. <code>newValue</code> will create the proper Node from a bunch of Nim types.</p>
+<p>The templates <code>nimFunc</code> and <code>nimMeth</code> will then create a NimFunc (or NimMeth) node and bind it to the name given in the Spry <code>root</code> Map.</p>
+<p>By looking at the various VM modules you can easily see how to make your own! It's easy.</p>
+<h2 id="spry-grammar">Spry grammar<a class="headerlink" href="#spry-grammar" title="Permanent link">&para;</a></h2>
+<p>Here is a very informal extended BNF of Spry (as of now) written using similar conventions that Nim does. I think it's fairly correct - however - the <a href="https://github.com/gokr/spry/blob/master/src/spryvm.nim#L1-L734">current parser in Spry</a> is a handwritten iterative (not recursive) parser so some parts were hard to express, like rules for comments and whitespace, see the notes in the BNF for details.</p>
+<p>In this EBNF <code>(a)*</code> means 0 or more a's, <code>a+</code> means 1 or more a's, and <code>(a)?</code> means an optional a. Parentheses may be used to group elements.
+<code>{}</code> are used to describe character sets. Stuff I can't figure out is described inside <code>{{ }}</code> using plain english.</p>
+<p>Note that <code>true, false, nil, undef</code> and all control structures are expressed using words, so these 26 lines are actually the complete grammar!</p>
+<div class="codehilite"><pre><span></span><code># Ints are parsed using Nim parseInt, floats using parseFloat and strings using unescape.
+# This means they follow the following grammar.
+int = [&#39;+&#39; | &#39;-&#39;] digit ([&#39;_&#39;] digit)*
+exponent = (&#39;e&#39; | &#39;E&#39;) [&#39;+&#39; | &#39;-&#39;] digit ([&#39;_&#39;] digit)*
+float = [&#39;+&#39; | &#39;-&#39;] digit ([&#39;_&#39;] digit)* ((&#39;.&#39; ([&#39;_&#39;] digit)* [exponent]) | exponent)
+
+# Inside the string we replace any \\ by \, any \&#39; by &#39;, any \&quot; by &quot; and any
+# \xHH (where HH is a hexadecimal value) with the corresponding character
+string = &#39;&quot;&#39; {{all sequences of characters except a \&quot; not preceded by a \\}} &#39;&quot;&#39;
+
+# Literals are pluggable in the Parser, but these three are the core ones
+literal = int | float | string
+
+# Same definition as in Nim strutils, whitespace separates words in Spry
+whitespace = {&#39; &#39;, &#39;\x09&#39;, &#39;\x0B&#39;, &#39;\x0D&#39;, &#39;\x0A&#39;, &#39;\x0C&#39;}
+
+# Note that there is a set of special characters that can only form
+# names together with other special characters.
+name = {{any sequence of characters not parsed as a literal}}
+
+qualifiedname = name &#39;::&#39; name
+
+evalnormalword = (name | qualifiedname)
+evalselfword = &#39;@&#39; name
+evalouterword = &#39;..&#39; name
+
+evalword = evalouterword | evalselfword | evalnormalword
+
+getnormalword = &#39;$&#39; (name | qualifiedname)
+getselfword = &#39;$@&#39; name
+getouterword = &#39;$..&#39; name
+
+getword = getouterword | getselfword | getnormalword
+
+argevalword = &#39;:&#39; name
+arggetword =  &#39;:$&#39; name
+
+argword = argevalword | arggetword
+
+word = evalword | getword | argword
+
+block = &#39;[&#39; program &#39;]&#39;
+paren = &#39;(&#39; program &#39;)&#39;
+curly = &#39;{&#39; program &#39;}&#39;
+
+# Comments are detected outside literals and consume the rest of the line
+# They do NOT constitute nodes in Spry. Yet.
+comment = &#39;#&#39; (any)* &#39;\l&#39;
+
+node = literal | word | block | paren | curly
+
+# A program is just a sequence of nodes separated by optional whitespace.
+# Perhaps not exactly correct, two words in sequence *must* be separated by whitespace.
+program = ((whitespace)? node (whitespace)?)*
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Spry is licensed under the <a href='https://github.com/gokr/spry/blob/master/LICENSE'>MIT license
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gokr/spry" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
